@@ -1,11 +1,14 @@
-package io.weba.api;
+package io.weba.api.ui;
 
+import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.timezone.TimezoneRepository;
+import io.weba.api.infrastructure.application.DomainEventPublisherImpl;
 import io.weba.api.infrastructure.domain.account.postgres.AccountRepositoryImpl;
 import io.weba.api.infrastructure.domain.timezone.TimezoneRepositoryImpl;
 import org.hibernate.SessionFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
@@ -18,6 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScan(basePackages = "io.weba")
 public class ApplicationContextConfig {
 
     @Bean(name = "dataSource")
@@ -43,16 +47,5 @@ public class ApplicationContextConfig {
     @Bean(name = "transactionManager")
     public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
         return new HibernateTransactionManager(sessionFactory);
-    }
-
-    @Autowired
-    @Bean(name = "accountRepository")
-    public AccountRepository getAccountRepository(SessionFactory sessionFactory) {
-        return new AccountRepositoryImpl(sessionFactory);
-    }
-
-    @Bean(name = "timezoneRepository")
-    public TimezoneRepository getTimezoneRepository() {
-        return new TimezoneRepositoryImpl();
     }
 }

@@ -1,11 +1,12 @@
 package io.weba.api.application.event;
 
+import io.weba.api.application.base.DomainEvent;
 import io.weba.api.domain.account.AccountId;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AddAccountEvent {
+public class AddAccountEvent implements DomainEvent {
     @NotNull
     @Size(min=2, max=100)
     public String name;

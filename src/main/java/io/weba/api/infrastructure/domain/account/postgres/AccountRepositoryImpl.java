@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class AccountRepositoryImpl implements AccountRepository {
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
+    @Autowired
     public AccountRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

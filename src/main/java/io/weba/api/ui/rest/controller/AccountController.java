@@ -1,10 +1,10 @@
 package io.weba.api.ui.rest.controller;
 
+import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountId;
 import io.weba.api.domain.account.AccountRepository;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +22,11 @@ public class AccountController {
     private AccountRepository accountRepository;
 
     @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+    private DomainEventPublisher domainEventPublisher;
 
     @RequestMapping(method = RequestMethod.POST, value = "/account")
     public ResponseEntity<AccountId> create(@Valid @RequestBody AddAccountEvent addAccountEvent) {
-        this.applicationEventPublisher.publishEvent(addAccountEvent);
+        this.domainEventPublisher.publishEvent(addAccountEvent);
 
         return new ResponseEntity<>(addAccountEvent.accountId(), HttpStatus.CREATED);
     }
