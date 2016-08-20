@@ -2,7 +2,9 @@ package io.weba.api;
 
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
+import io.weba.api.domain.timezone.TimezoneRepository;
 import io.weba.api.infrastructure.domain.account.postgres.AccountRepositoryImpl;
+import io.weba.api.infrastructure.domain.timezone.TimezoneRepositoryImpl;
 import org.hibernate.SessionFactory;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -32,10 +34,9 @@ public class ApplicationContextConfig {
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) {
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
-        sessionBuilder.addAnnotatedClasses(Account.class);
-        SessionFactory sessionFactory = sessionBuilder.buildSessionFactory();
+        sessionBuilder.scanPackages("io.weba.api.domain");
 
-        return sessionFactory;
+        return sessionBuilder.buildSessionFactory();
     }
 
     @Autowired
@@ -48,5 +49,10 @@ public class ApplicationContextConfig {
     @Bean(name = "accountRepository")
     public AccountRepository getAccountRepository(SessionFactory sessionFactory) {
         return new AccountRepositoryImpl(sessionFactory);
+    }
+
+    @Bean(name = "timezoneRepository")
+    public TimezoneRepository getTimezoneRepository() {
+        return new TimezoneRepositoryImpl();
     }
 }

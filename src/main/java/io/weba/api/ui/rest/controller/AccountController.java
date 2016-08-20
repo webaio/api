@@ -1,30 +1,40 @@
 package io.weba.api.ui.rest.controller;
 
+import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountId;
 import io.weba.api.domain.account.AccountRepository;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/api")
 public class AccountController {
-
     @Autowired
     private AccountRepository accountRepository;
 
-    @RequestMapping("/")
-    public String get() {
-        this.accountRepository.createNewAccount(new Account("test"));
-        return "Hello World2!";
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
+    @RequestMapping(method = RequestMethod.POST, value = "/account")
+    public ResponseEntity<AccountId> create(@Valid @RequestBody AddAccountEvent addAccountEvent) {
+        this.applicationEventPublisher.publishEvent(addAccountEvent);
+
+        return new ResponseEntity<>(addAccountEvent.accountId(), HttpStatus.CREATED);
     }
 
-    @RequestMapping("/test/{test}")
-
-    public Account test(@PathVariable String test) {
-        Account by = this.accountRepository.findBy(new AccountId(AccountId.fromString(test)));
-
-        return by;
+    @RequestMapping(method = RequestMethod.GET, value = "/account/{accountUuid}")
+    public ResponseEntity<Account> get(@PathVariable String accountUuid) {
+        return Optional.ofNullable(this.accountRepository.findBy(new AccountId(AccountId.fromString(accountUuid))))
+                .map(result -> new ResponseEntity<>(result, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

@@ -34,4 +34,12 @@ public class Account implements Serializable {
     }
 
     public Account() {}
+
+    public AccountId getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
