@@ -12,4 +12,15 @@ public class AccountId extends UuidIdentifier implements Serializable {
         super(uuid);
         this.id = uuid;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if ((null == obj) || (obj.getClass() != AccountId.class)) {
+            return false;
+        }
+
+        AccountId id = (AccountId) obj;
+
+        return id.id == this.id;
+    }
 }
