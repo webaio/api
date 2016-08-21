@@ -1,12 +1,5 @@
 package io.weba.api.ui;
 
-import io.weba.api.application.base.DomainEventPublisher;
-import io.weba.api.domain.account.Account;
-import io.weba.api.domain.account.AccountRepository;
-import io.weba.api.domain.timezone.TimezoneRepository;
-import io.weba.api.infrastructure.application.DomainEventPublisherImpl;
-import io.weba.api.infrastructure.domain.account.postgres.AccountRepositoryImpl;
-import io.weba.api.infrastructure.domain.timezone.TimezoneRepositoryImpl;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,7 +16,6 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "io.weba")
 public class ApplicationContextConfig {
-
     @Bean(name = "dataSource")
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

@@ -38,7 +38,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.postgresql:postgresql:9.4-1206-jdbc42")
-    compile("org.springframework.restdocs:spring-restdocs-mockmvc:1.1.1.RELEASE")
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-starter-test")
+    compile("info.cukes:cucumber-java:1.2.0")
+    compile("info.cukes:cucumber-junit:1.2.0")
+    compile("info.cukes:cucumber-spring:1.2.0")
     testCompile("junit:junit")
 }
 
