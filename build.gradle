@@ -31,14 +31,23 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    //base
     compile("org.springframework.boot:spring-boot-starter-web")
+
+    //security
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-oauth2:1.1.2.RELEASE")
+
+    //db
     compile("org.postgresql:postgresql:9.4-1206-jdbc42")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    //devtools
     compile("org.springframework.boot:spring-boot-devtools")
+
+    //tests
     compile("org.springframework.boot:spring-boot-starter-test")
     compile("info.cukes:cucumber-java:1.2.0")
     compile("info.cukes:cucumber-junit:1.2.0")

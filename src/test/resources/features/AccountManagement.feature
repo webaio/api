@@ -6,4 +6,6 @@ Feature: As I user i would like to manage account
     When I decide to create account with configuration:
     | name           | url            | timezone      |
     | Weba main site | http://weba.io | Europe/Warsaw |
-    Then I should see configured tracker with given javascript code
+    Then I should see configured tracker with given javascript code:
+    | code              |
+    | <script></script  |

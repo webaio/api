@@ -11,7 +11,7 @@ import java.io.Serializable;
 @TypeDefs({
     @TypeDef(name = "account_id", typeClass = AccountIdType.class)
 })
-@Table(name = "account")
+@Table(name = "accounts")
 @Entity
 public class Account implements Serializable {
     @Id

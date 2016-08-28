@@ -14,8 +14,12 @@ public class AddAccountEvent implements DomainEvent {
     @NotNull
     private AccountId accountId;
 
-    public  AddAccountEvent() {
+    public AddAccountEvent() {
         this.accountId = new AccountId(AccountId.generate());
+    }
+
+    public AddAccountEvent(AccountId accountId) {
+        this.accountId = accountId;
     }
 
     public String name() {
