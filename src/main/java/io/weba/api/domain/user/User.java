@@ -9,8 +9,6 @@ import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @TypeDefs({
         @TypeDef(name = "user_id", typeClass = UserIdType.class)
@@ -36,29 +34,25 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @ManyToOne
-    @JoinColumn(name ="account_id")
+    @JoinColumn(name = "account_id")
     private Account account;
 
-    public User(UserId userId, String email, String password, Account account, String firstName, String lastName) {
+    public User(UserId userId, String email, String password, Account account, String firstName, String lastName, Role role) {
         this.id = userId;
         this.email = email;
         this.password = password;
         this.account = account;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roles = new ArrayList<>();
+        this.role = role;
     }
 
     public User() {
-        this.roles = new ArrayList<>();
     }
 
     public UserId getId() {
@@ -73,16 +67,8 @@ public class User implements Serializable {
         return password;
     }
 
-    public void addRole(Role role) {
-        this.roles.add(role);
-    }
-
-    public void removeRole(Role role) {
-        this.roles.remove(role);
-    }
-
-    public Collection<Role> getRoles() {
-        return this.roles;
+    public Role getRoles() {
+        return this.role;
     }
 
     public String getFirstName() {

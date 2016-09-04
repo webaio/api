@@ -1,5 +1,6 @@
 package io.weba.api.domain.role;
 
+import io.weba.api.domain.user.User;
 import io.weba.api.infrastructure.postgres.type.RoleIdType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @TypeDefs({
         @TypeDef(name = "role_id", typeClass = RoleIdType.class)
@@ -33,7 +36,8 @@ public class Role implements Serializable {
         this.name = name;
     }
 
-    public Role() {}
+    public Role() {
+    }
 
     public RoleId getId() {
         return id;

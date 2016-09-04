@@ -15,13 +15,13 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public void createNewAccount(Account account) {
+    public void add(Account account) {
         list.add(account);
     }
 
     @Override
     public Account findBy(AccountId accountId) {
-        for(Account account: list) {
+        for (Account account : list) {
             if (account.getId() == accountId) {
                 return account;
             }

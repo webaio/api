@@ -18,6 +18,6 @@ public class AddAccountEventListener {
     @EventListener
     public void handle(AddAccountEvent addAccountEvent) {
         Account account = new Account(addAccountEvent.accountId(), addAccountEvent.name());
-        this.accountRepository.createNewAccount(account);
+        this.accountRepository.add(account);
     }
 }

@@ -1,4 +1,4 @@
-package io.weba.api.infrastructure.domain.user;
+package io.weba.api.infrastructure.domain.user.postgres;
 
 import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserUpdater;
@@ -20,6 +20,5 @@ public class UserUpdaterImpl implements UserUpdater {
     @Transactional
     public void update(User user) {
         this.sessionFactory.getCurrentSession().merge(user);
-        this.sessionFactory.getCurrentSession().saveOrUpdate(user);
     }
 }

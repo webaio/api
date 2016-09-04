@@ -16,7 +16,7 @@ public class DomainEventPublisherImpl implements DomainEventPublisher {
     }
 
     @Override
-    public void publishEvent(DomainEvent domainEvent) {
+    public void publish(DomainEvent domainEvent) {
         this.applicationEventPublisher.publishEvent(domainEvent);
     }
 }

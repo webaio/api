@@ -8,10 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootContextLoader;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +23,7 @@ public class AccountRepositoryImplTest {
     public void itPersistsAccountInStorage() {
         AccountId accountId = new AccountId(AccountId.generate());
         Account account = new Account(accountId, "Test account repository");
-        this.accountRepository.createNewAccount(account);
+        this.accountRepository.add(account);
         Account persistedAccount = this.accountRepository.findBy(accountId);
 
         assertEquals(persistedAccount.getId().id, account.getId().id);

@@ -20,7 +20,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     @Transactional
-    public void createNewAccount(Account account) {
+    public void add(Account account) {
         this.sessionFactory.getCurrentSession().save(account);
     }
 

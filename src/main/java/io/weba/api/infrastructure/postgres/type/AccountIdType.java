@@ -4,7 +4,6 @@ import io.weba.api.domain.account.AccountId;
 import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 import org.hibernate.type.PostgresUUIDType;
 
-
 public class AccountIdType extends AbstractSingleColumnStandardBasicType<AccountId> {
     public static final AccountIdType INSTANCE = new AccountIdType();
 

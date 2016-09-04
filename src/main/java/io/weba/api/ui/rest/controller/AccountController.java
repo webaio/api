@@ -26,7 +26,7 @@ public class AccountController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/account")
     public ResponseEntity<AccountId> create(@Valid @RequestBody AddAccountEvent addAccountEvent) {
-        this.domainEventPublisher.publishEvent(addAccountEvent);
+        this.domainEventPublisher.publish(addAccountEvent);
 
         return new ResponseEntity<>(addAccountEvent.accountId(), HttpStatus.CREATED);
     }

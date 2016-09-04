@@ -1,15 +1,16 @@
 package io.weba.api.domain.account;
 
 import io.weba.api.infrastructure.postgres.type.AccountIdType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
 @TypeDefs({
-    @TypeDef(name = "account_id", typeClass = AccountIdType.class)
+        @TypeDef(name = "account_id", typeClass = AccountIdType.class)
 })
 @Table(name = "accounts")
 @Entity
@@ -33,7 +34,8 @@ public class Account implements Serializable {
         this.name = name;
     }
 
-    public Account() {}
+    public Account() {
+    }
 
     public AccountId getId() {
         return id;

@@ -30,7 +30,7 @@ public class AccountManagementStepDefs {
     public void configured_account_with_name(String accountName) throws Throwable {
         AddAccountEvent addAccountEvent = new AddAccountEvent();
         addAccountEvent.name = accountName;
-        this.domainEventPublisher.publishEvent(addAccountEvent);
+        this.domainEventPublisher.publish(addAccountEvent);
         this.account = this.accountRepository.findBy(addAccountEvent.accountId());
     }
 

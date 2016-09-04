@@ -1,4 +1,4 @@
-package io.weba.api.infrastructure.domain.role;
+package io.weba.api.infrastructure.domain.role.postgres;
 
 import io.weba.api.domain.role.Role;
 import io.weba.api.domain.role.RoleId;

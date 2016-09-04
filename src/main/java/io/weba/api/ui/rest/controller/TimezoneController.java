@@ -2,7 +2,6 @@ package io.weba.api.ui.rest.controller;
 
 import io.weba.api.domain.timezone.TimezoneRepository;
 import io.weba.api.domain.timezone.Timezones;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ public class TimezoneController {
     @Autowired
     private TimezoneRepository timezoneRepository;
 
-    @PreAuthorize("#oauth2.hasScope('write')")
     @RequestMapping(method = RequestMethod.GET, value = "/timezones")
     public Timezones get() {
         return this.timezoneRepository.getList();
