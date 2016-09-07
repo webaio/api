@@ -2,25 +2,18 @@ package io.weba.api.domain.user;
 
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.role.Role;
-import io.weba.api.infrastructure.postgres.type.UserIdType;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
-@TypeDefs({
-        @TypeDef(name = "user_id", typeClass = UserIdType.class)
-})
 @Table(name = "users")
 @Entity
 public class User implements Serializable {
     @Id
     @Column
     @Basic
-    @Type(type = "user_id")
-    private UserId id;
+    private UUID id;
 
     @Column(name = "email")
     private String email;
@@ -42,7 +35,7 @@ public class User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public User(UserId userId, String email, String password, Account account, String firstName, String lastName, Role role) {
+    public User(UUID userId, String email, String password, Account account, String firstName, String lastName, Role role) {
         this.id = userId;
         this.email = email;
         this.password = password;
@@ -55,7 +48,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public UserId getId() {
+    public UUID getId() {
         return id;
     }
 

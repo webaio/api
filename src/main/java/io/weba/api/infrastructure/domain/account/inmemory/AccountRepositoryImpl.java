@@ -1,11 +1,11 @@
 package io.weba.api.infrastructure.domain.account.inmemory;
 
 import io.weba.api.domain.account.Account;
-import io.weba.api.domain.account.AccountId;
 import io.weba.api.domain.account.AccountRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AccountRepositoryImpl implements AccountRepository {
     private final List<Account> list;
@@ -20,7 +20,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account findBy(AccountId accountId) {
+    public Account findBy(UUID accountId) {
         for (Account account : list) {
             if (account.getId() == accountId) {
                 return account;

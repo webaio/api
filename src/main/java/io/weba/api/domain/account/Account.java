@@ -1,43 +1,34 @@
 package io.weba.api.domain.account;
 
-import io.weba.api.infrastructure.postgres.type.AccountIdType;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
-@TypeDefs({
-        @TypeDef(name = "account_id", typeClass = AccountIdType.class)
-})
 @Table(name = "accounts")
 @Entity
 public class Account implements Serializable {
     @Id
     @Column
     @Basic
-    @Type(type = "account_id")
-    private AccountId id;
+    private UUID id;
 
     @Column(name = "name")
     private String name;
 
-    public Account(AccountId id, String name) {
+    public Account(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
 
     public Account(String name) {
-        this.id = new AccountId(AccountId.generate());
+        this.id = UUID.randomUUID();
         this.name = name;
     }
 
     public Account() {
     }
 
-    public AccountId getId() {
+    public UUID getId() {
         return id;
     }
 

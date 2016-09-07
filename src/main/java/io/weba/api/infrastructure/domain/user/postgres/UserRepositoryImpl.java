@@ -1,18 +1,14 @@
 package io.weba.api.infrastructure.domain.user.postgres;
 
 import io.weba.api.domain.user.User;
-import io.weba.api.domain.user.UserId;
 import io.weba.api.domain.user.UserRepository;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -44,7 +40,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public User findBy(UserId userId) {
+    public User findBy(UUID userId) {
         Object result = this.sessionFactory
                 .getCurrentSession()
                 .createCriteria(User.class)

@@ -36,7 +36,13 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(this.dataSource);
+        clients.jdbc(this.dataSource)
+                .withClient("fooClientIdPassword")
+                .secret("secret")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                .scopes("foo", "read", "write")
+                .accessTokenValiditySeconds(3600)
+                .refreshTokenValiditySeconds(2592000);
     }
 
     @Override

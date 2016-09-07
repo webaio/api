@@ -1,8 +1,10 @@
 package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
-import io.weba.api.domain.account.AccountId;
-import io.weba.api.infrastructure.validator.UUID;
+
+import java.util.UUID;
+
+import io.weba.api.infrastructure.validator.UUIDConstraint;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,14 +15,14 @@ public class AddAccountEvent implements DomainEvent {
     public String name;
 
     @NotNull
-    @UUID
-    private AccountId accountId;
+    @UUIDConstraint
+    private UUID accountId;
 
     public AddAccountEvent() {
-        this.accountId = new AccountId(AccountId.generate());
+        this.accountId = UUID.randomUUID();
     }
 
-    public AddAccountEvent(AccountId accountId) {
+    public AddAccountEvent(UUID accountId) {
         this.accountId = accountId;
     }
 
@@ -28,7 +30,7 @@ public class AddAccountEvent implements DomainEvent {
         return this.name;
     }
 
-    public AccountId accountId() {
+    public UUID accountId() {
         return this.accountId;
     }
 }

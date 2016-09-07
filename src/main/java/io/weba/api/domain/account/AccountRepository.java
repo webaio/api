@@ -1,7 +1,9 @@
 package io.weba.api.domain.account;
 
+import java.util.UUID;
+
 public interface AccountRepository {
     void add(Account account);
 
-    Account findBy(AccountId accountId);
+    Account findBy(UUID accountId);
 }

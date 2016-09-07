@@ -4,13 +4,10 @@ import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.application.event.AddUserEvent;
 import io.weba.api.domain.account.Account;
-import io.weba.api.domain.account.AccountId;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.role.Role;
-import io.weba.api.domain.role.RoleId;
 import io.weba.api.domain.role.RoleRepository;
 import io.weba.api.domain.user.User;
-import io.weba.api.domain.user.UserId;
 import io.weba.api.domain.user.UserRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -18,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Component
 public class UserManagementDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -68,7 +67,7 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        Account defaultAccount = this.accountRepository.findBy(new AccountId(AccountId.fromString(ACCOUNT_UUID)));
+        Account defaultAccount = this.accountRepository.findBy(UUID.fromString(ACCOUNT_UUID));
 
         if (defaultAccount == null) {
             this.createAccount();
@@ -76,7 +75,7 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
 
         this.createRoles();
 
-        User user = this.userRepository.findBy(new UserId(UserId.fromString(USER_UUID)));
+        User user = this.userRepository.findBy(UUID.fromString(USER_UUID));
 
 
         if (user == null) {
@@ -86,41 +85,39 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
 
     @Transactional
     private void createAccount() {
-        AddAccountEvent addAccountEvent = new AddAccountEvent(
-                new AccountId(AccountId.fromString(ACCOUNT_UUID))
-        );
+        AddAccountEvent addAccountEvent = new AddAccountEvent(UUID.fromString(ACCOUNT_UUID));
         addAccountEvent.name = ACCOUNT_NAME;
         this.domainEventPublisher.publish(addAccountEvent);
     }
 
     @Transactional
     private void createRoles() {
-        Role roleUser = this.roleRepository.findBy(new RoleId(RoleId.fromString(ROLE_USER_UUID)));
-        Role roleAdmin = this.roleRepository.findBy(new RoleId(RoleId.fromString(ROLE_ADMIN_UUID)));
-        Role roleSuperAdmin = this.roleRepository.findBy(new RoleId(RoleId.fromString(ROLE_SUPER_ADMIN_UUID)));
+        Role roleUser = this.roleRepository.findBy(UUID.fromString(ROLE_USER_UUID));
+        Role roleAdmin = this.roleRepository.findBy(UUID.fromString(ROLE_ADMIN_UUID));
+        Role roleSuperAdmin = this.roleRepository.findBy(UUID.fromString(ROLE_SUPER_ADMIN_UUID));
 
         if (roleUser == null) {
-            this.roleRepository.add(new Role(new RoleId(RoleId.fromString(ROLE_USER_UUID)), ROLE_USER_NAME));
+            this.roleRepository.add(new Role(UUID.fromString(ROLE_USER_UUID), ROLE_USER_NAME));
         }
 
         if (roleAdmin == null) {
-            this.roleRepository.add(new Role(new RoleId(RoleId.fromString(ROLE_ADMIN_UUID)), ROLE_ADMIN_NAME));
+            this.roleRepository.add(new Role(UUID.fromString(ROLE_ADMIN_UUID), ROLE_ADMIN_NAME));
         }
 
         if (roleSuperAdmin == null) {
-            this.roleRepository.add(new Role(new RoleId(RoleId.fromString(ROLE_SUPER_ADMIN_UUID)), ROLE_SUPER_ADMIN_NAME));
+            this.roleRepository.add(new Role(UUID.fromString(ROLE_SUPER_ADMIN_UUID), ROLE_SUPER_ADMIN_NAME));
         }
     }
 
     @Transactional
     private void createUser() {
-        AddUserEvent addUserEvent = new AddUserEvent(new UserId(UserId.fromString(USER_UUID)));
-        addUserEvent.accountId = new AccountId(AccountId.fromString(ACCOUNT_UUID));
+        AddUserEvent addUserEvent = new AddUserEvent(UUID.fromString(USER_UUID));
+        addUserEvent.accountId = UUID.fromString(ACCOUNT_UUID);
         addUserEvent.email = this.userEmail;
         addUserEvent.firstName = this.userFirstName;
         addUserEvent.lastName = this.userLastName;
         addUserEvent.password = this.userPassword;
-        addUserEvent.roleId =  new RoleId(RoleId.fromString(ROLE_SUPER_ADMIN_UUID));
+        addUserEvent.roleId = UUID.fromString(ROLE_SUPER_ADMIN_UUID);
 
         this.domainEventPublisher.publish(addUserEvent);
     }

@@ -1,14 +1,15 @@
 package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
-import io.weba.api.domain.account.AccountId;
-import io.weba.api.domain.role.RoleId;
-import io.weba.api.domain.user.UserId;
-import io.weba.api.infrastructure.validator.UUID;
+
+import java.util.UUID;
+
+import io.weba.api.infrastructure.validator.UUIDConstraint;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 
 public class AddUserEvent implements DomainEvent {
     @NotNull
@@ -27,22 +28,22 @@ public class AddUserEvent implements DomainEvent {
     public String password;
 
     @NotNull
-    @UUID
-    public AccountId accountId;
+    @UUIDConstraint
+    public UUID accountId;
 
     @NotNull
-    @UUID
-    public RoleId roleId;
+    @UUIDConstraint
+    public UUID roleId;
 
     @NotNull
-    @UUID
-    private UserId userId;
+    @UUIDConstraint
+    private UUID userId;
 
     public AddUserEvent() {
-        this.userId = new UserId(UserId.generate());
+        this.userId = UUID.randomUUID();
     }
 
-    public AddUserEvent(UserId userId) {
+    public AddUserEvent(UUID userId) {
         this.userId = userId;
     }
 
@@ -54,7 +55,7 @@ public class AddUserEvent implements DomainEvent {
         return this.lastName;
     }
 
-    public UserId userId() {
+    public UUID userId() {
         return this.userId;
     }
 
@@ -66,11 +67,11 @@ public class AddUserEvent implements DomainEvent {
         return this.password;
     }
 
-    public AccountId accountId() {
+    public UUID accountId() {
         return this.accountId;
     }
 
-    public RoleId roleId() {
+    public UUID roleId() {
         return this.roleId;
     }
 }
