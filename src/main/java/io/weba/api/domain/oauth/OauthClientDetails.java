@@ -6,14 +6,13 @@ import javax.persistence.*;
 @Entity
 public class OauthClientDetails {
     @Id
-    @Column
-    @Basic
+    @Column(name = "client_id")
     private String clientId;
 
-    @Column(name = "name")
+    @Column(name = "resource_ids")
     private String resourceIds;
 
-    @Column(name = "resource_ids")
+    @Column(name = "client_secret")
     private String clientSecret;
 
     @Column(name = "scope")
@@ -22,8 +21,8 @@ public class OauthClientDetails {
     @Column(name = "authorized_grant_types")
     private String authorizedGrantTypes;
 
-    @Column(name = "web_server_redirect_url")
-    private String webServerRedirectUrl;
+    @Column(name = "web_server_redirect_uri")
+    private String webServerRedirectUri;
 
     @Column(name = "authorities")
     private String authorities;
@@ -46,7 +45,7 @@ public class OauthClientDetails {
         this.resourceIds = null;
         this.scope = "read,write";
         this.authorizedGrantTypes = "password,authorization_code,refresh_token";
-        this.webServerRedirectUrl = null;
+        this.webServerRedirectUri = null;
         this.authorities = null;
         this.accessTokenValidity = 3600;
         this.refreshTokenValidity = 2592000;
@@ -76,8 +75,8 @@ public class OauthClientDetails {
         return authorizedGrantTypes;
     }
 
-    public String getWebServerRedirectUrl() {
-        return webServerRedirectUrl;
+    public String getWebServerRedirectUri() {
+        return webServerRedirectUri;
     }
 
     public String getAuthorities() {

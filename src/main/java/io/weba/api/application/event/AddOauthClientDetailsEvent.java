@@ -6,7 +6,7 @@ import io.weba.api.infrastructure.validator.UUIDConstraint;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-public class AddOuathClientDetailsEvent implements DomainEvent {
+public class AddOauthClientDetailsEvent implements DomainEvent {
     @NotNull
     @UUIDConstraint
     private UUID clientId;
@@ -14,6 +14,11 @@ public class AddOuathClientDetailsEvent implements DomainEvent {
     @NotNull
     @UUIDConstraint
     private UUID clientSecret;
+
+    public AddOauthClientDetailsEvent(UUID clientId, UUID clientSecret) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+    }
 
     public UUID clientSecret() {
         return clientSecret;

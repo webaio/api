@@ -2,9 +2,12 @@ package io.weba.api.ui.rest.initializer;
 
 import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
+import io.weba.api.application.event.AddOauthClientDetailsEvent;
 import io.weba.api.application.event.AddUserEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
+import io.weba.api.domain.oauth.OauthClientDetails;
+import io.weba.api.domain.oauth.OauthClientDetailsRepository;
 import io.weba.api.domain.role.Role;
 import io.weba.api.domain.role.RoleRepository;
 import io.weba.api.domain.user.User;
@@ -24,6 +27,7 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     private final RoleRepository roleRepository;
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
+    private final OauthClientDetailsRepository oauthClientDetailsRepository;
 
     private static final String ACCOUNT_UUID = "79d9a686-bff8-4f49-a4f5-6bb00497b7c3";
     private static final String ACCOUNT_NAME = "Default";
@@ -51,17 +55,25 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     @Value("${weba.admin.last_name}")
     private String userLastName;
 
+    @Value("${weba.admin.client_id}")
+    private String clientId;
+
+    @Value("${weba.admin.client_secret}")
+    private String clientSecret;
+
     @Autowired
     public UserManagementDataLoader(
             DomainEventPublisher domainEventPublisher,
             RoleRepository roleRepository,
             AccountRepository accountRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+            OauthClientDetailsRepository oauthClientDetailsRepository
     ) {
         this.domainEventPublisher = domainEventPublisher;
         this.roleRepository = roleRepository;
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
+        this.oauthClientDetailsRepository = oauthClientDetailsRepository;
     }
 
     @Override
@@ -77,9 +89,14 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
 
         User user = this.userRepository.findBy(UUID.fromString(USER_UUID));
 
-
         if (user == null) {
             this.createUser();
+        }
+
+        OauthClientDetails oauthClientDetails = this.oauthClientDetailsRepository.findBy(this.clientId);
+
+        if (oauthClientDetails == null) {
+            this.createOauthClient();
         }
     }
 
@@ -120,5 +137,15 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
         addUserEvent.roleId = UUID.fromString(ROLE_SUPER_ADMIN_UUID);
 
         this.domainEventPublisher.publish(addUserEvent);
+    }
+
+    @Transactional
+    private void createOauthClient() {
+        AddOauthClientDetailsEvent addOauthClientDetailsEvent = new AddOauthClientDetailsEvent(
+                UUID.fromString(this.clientId),
+                UUID.fromString(this.clientSecret)
+        );
+
+        this.domainEventPublisher.publish(addOauthClientDetailsEvent);
     }
 }

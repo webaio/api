@@ -7,19 +7,19 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddOuathClientDetailsEventListener {
+public class AddOauthClientDetailsEventListener {
     private final OauthClientDetailsRepository oauthClientDetailsRepository;
 
     @Autowired
-    public AddOuathClientDetailsEventListener(OauthClientDetailsRepository oauthClientDetailsRepository) {
+    public AddOauthClientDetailsEventListener(OauthClientDetailsRepository oauthClientDetailsRepository) {
         this.oauthClientDetailsRepository = oauthClientDetailsRepository;
     }
 
     @EventListener
-    public void handle(AddOuathClientDetailsEvent addOuathClientDetailsEvent) {
+    public void handle(AddOauthClientDetailsEvent addOauthClientDetailsEvent) {
         OauthClientDetails oauthClientDetails = new OauthClientDetails(
-                addOuathClientDetailsEvent.clientId().toString(),
-                addOuathClientDetailsEvent.clientSecret().toString()
+                addOauthClientDetailsEvent.clientId().toString(),
+                addOauthClientDetailsEvent.clientSecret().toString()
         );
 
         this.oauthClientDetailsRepository.add(oauthClientDetails);
