@@ -2,3 +2,32 @@ FORMAT: 1A
 HOST: http://api.weba.cloud
 
 # weba
+
+Documentation
+
+## Authorize [/oauth/token]
+
+### Get token [POST]
++ Attributes
+    + grant_type: password (string)
+    + username: admin@weba.io (string) - User email
+    + password: test (string) - User password
+
++ Request (application/x-www-form-urlencoded; charset=utf-8)
+
+    + Headers
+    
+            Authorization: Basic base64(client_id:client_secret)
+        
++ Response 200 (application/json)
+
+    + Body
+            {
+              "access_token": "eWgTHgGTzOwpfOV92g4EKheJ3Z5gnZsHgIg",
+              "token_type": "bearer",
+              "refresh_token": "eyJhbGciOlvbiI6ImFkb11CA75t8L2VV1UZ_6VEuJ0g5HsCUsU6HHDX_w",
+              "expires_in": 3599,
+              "scope": "read write",
+              "organization": "admin@weba.io",
+              "jti": "0a5b2d55-c994-4a80-bdb0-fcb4886bf555"
+            }
