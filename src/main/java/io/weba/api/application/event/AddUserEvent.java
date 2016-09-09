@@ -1,15 +1,10 @@
 package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
-
 import java.util.UUID;
-
-import io.weba.api.infrastructure.validator.UUIDConstraint;
 import org.hibernate.validator.constraints.Email;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 public class AddUserEvent implements DomainEvent {
     @NotNull
@@ -21,22 +16,16 @@ public class AddUserEvent implements DomainEvent {
     public String lastName;
 
     @Email
-    public String email;
+    public String username;
 
     @NotNull
     @Size(min = 2, max = 50)
     public String password;
 
-    @NotNull
-    @UUIDConstraint
     public UUID accountId;
 
-    @NotNull
-    @UUIDConstraint
     public UUID roleId;
 
-    @NotNull
-    @UUIDConstraint
     private UUID userId;
 
     public AddUserEvent() {
@@ -59,8 +48,8 @@ public class AddUserEvent implements DomainEvent {
         return this.userId;
     }
 
-    public String email() {
-        return this.email;
+    public String username() {
+        return this.username;
     }
 
     public String password() {

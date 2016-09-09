@@ -21,7 +21,6 @@ public class AddOauthClientDetailsEventListener {
                 addOauthClientDetailsEvent.clientId().toString(),
                 addOauthClientDetailsEvent.clientSecret().toString()
         );
-
         this.oauthClientDetailsRepository.add(oauthClientDetails);
     }
 }

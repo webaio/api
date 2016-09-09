@@ -17,7 +17,7 @@ public class TimezoneRepositoryImpl implements TimezoneRepository {
         String[] ids = TimeZone.getAvailableIDs();
 
         for (String id : ids) {
-            timezones.add(new Timezone(id, this.formatTimezone(SimpleTimeZone.getTimeZone(id))));
+            timezones.add(new Timezone(this.formatTimezone(SimpleTimeZone.getTimeZone(id))));
         }
 
         return timezones;

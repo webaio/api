@@ -1,11 +1,12 @@
 package io.weba.api.domain.user;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
     void add(User user);
 
-    User findBy(String email);
+    Optional<User> findBy(String username);
 
-    User findBy(UUID userId);
+    Optional<User> findBy(UUID userId);
 }

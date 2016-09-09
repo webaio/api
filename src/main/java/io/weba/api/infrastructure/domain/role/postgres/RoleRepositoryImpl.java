@@ -4,11 +4,11 @@ import io.weba.api.domain.role.Role;
 import io.weba.api.domain.role.RoleRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
@@ -27,7 +27,7 @@ public class RoleRepositoryImpl implements RoleRepository {
 
     @Override
     @Transactional
-    public Role findBy(UUID roleId) {
+    public Optional<Role> findBy(UUID roleId) {
         Object result = this.sessionFactory
                 .getCurrentSession()
                 .createCriteria(Role.class)
@@ -35,6 +35,6 @@ public class RoleRepositoryImpl implements RoleRepository {
                 .setMaxResults(1)
                 .uniqueResult();
 
-        return (Role) result;
+        return Optional.ofNullable((Role) result);
     }
 }

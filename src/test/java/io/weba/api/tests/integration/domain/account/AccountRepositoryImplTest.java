@@ -2,7 +2,7 @@ package io.weba.api.tests.integration.domain.account;
 
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
-import io.weba.api.rest.application.SpringApplication;
+import io.weba.api.ui.rest.application.SpringApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

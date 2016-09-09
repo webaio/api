@@ -4,11 +4,11 @@ import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -27,20 +27,20 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
-    public User findBy(String email) {
+    public Optional<User> findBy(String username) {
         Object result = this.sessionFactory
                 .getCurrentSession()
                 .createCriteria(User.class)
-                .add(Restrictions.eq("email", email))
+                .add(Restrictions.eq("username", username))
                 .setMaxResults(1)
                 .uniqueResult();
 
-        return (User) result;
+        return Optional.ofNullable((User) result);
     }
 
     @Override
     @Transactional
-    public User findBy(UUID userId) {
+    public Optional<User> findBy(UUID userId) {
         Object result = this.sessionFactory
                 .getCurrentSession()
                 .createCriteria(User.class)
@@ -48,6 +48,6 @@ public class UserRepositoryImpl implements UserRepository {
                 .setMaxResults(1)
                 .uniqueResult();
 
-        return (User) result;
+        return Optional.ofNullable((User) result);
     }
 }

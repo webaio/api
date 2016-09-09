@@ -19,11 +19,6 @@ public class Account implements Serializable {
         this.name = name;
     }
 
-    public Account(String name) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-    }
-
     public Account() {
     }
 
