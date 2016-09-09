@@ -12,7 +12,6 @@ import java.util.UUID;
 public class User implements Serializable {
     @Id
     @Column
-    @Basic
     private UUID id;
 
     @Column(name = "email")

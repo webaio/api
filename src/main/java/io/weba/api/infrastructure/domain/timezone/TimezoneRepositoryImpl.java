@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TimezoneRepositoryImpl implements TimezoneRepository {
     @Override
-    public Timezones getList() {
+    public Timezones findAll() {
         Timezones timezones = new Timezones();
         String[] ids = TimeZone.getAvailableIDs();
 

@@ -9,7 +9,7 @@ import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
-import io.weba.api.ui.Application;
+import io.weba.api.ui.rest.config.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.test.context.ContextConfiguration;

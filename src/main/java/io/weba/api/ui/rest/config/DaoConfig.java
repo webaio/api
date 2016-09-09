@@ -1,4 +1,4 @@
-package io.weba.api.ui;
+package io.weba.api.ui.rest.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "io.weba")
-public class ApplicationContextConfig {
+public class DaoConfig {
     @Value("${spring.datasource.url}")
     private String dbUrl;
 

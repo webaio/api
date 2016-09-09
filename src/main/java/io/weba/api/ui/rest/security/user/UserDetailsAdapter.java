@@ -2,8 +2,10 @@ package io.weba.api.ui.rest.security.user;
 
 import io.weba.api.domain.user.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class UserDetailsAdapter implements UserDetails {
@@ -15,7 +17,10 @@ public class UserDetailsAdapter implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<GrantedAuthority> grantedCollection = new ArrayList<>();
+        grantedCollection.add(new SimpleGrantedAuthority(this.domainUser.getRoles().getName()));
+
+        return grantedCollection;
     }
 
     @Override

@@ -15,6 +15,6 @@ public class TimezoneController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/timezones")
     public Timezones get() {
-        return this.timezoneRepository.getList();
+        return this.timezoneRepository.findAll();
     }
 }

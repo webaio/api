@@ -1,4 +1,4 @@
-package io.weba.api.ui;
+package io.weba.api.ui.rest.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

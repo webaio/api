@@ -9,7 +9,6 @@ import java.util.UUID;
 public class Role implements Serializable {
     @Id
     @Column
-    @Basic
     private UUID id;
 
     @Column(name = "name")
