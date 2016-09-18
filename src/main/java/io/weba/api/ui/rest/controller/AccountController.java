@@ -23,7 +23,7 @@ public class AccountController {
     private DomainEventPublisher domainEventPublisher;
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
-    @RequestMapping(method = RequestMethod.POST, value = "/account")
+    @RequestMapping(method = RequestMethod.POST, value = "/admin/account")
     public ResponseEntity<UUID> create(@Valid @RequestBody AddAccountEvent addAccountEvent) {
         this.domainEventPublisher.publish(addAccountEvent);
 
@@ -31,7 +31,7 @@ public class AccountController {
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
-    @RequestMapping(method = RequestMethod.GET, value = "/account/{accountUuid}")
+    @RequestMapping(method = RequestMethod.GET, value = "/admin/account/{accountUuid}")
     public ResponseEntity<Account> get(@PathVariable String accountUuid) {
         return this.accountRepository.findBy(UUID.fromString(accountUuid))
                 .map(result -> new ResponseEntity<>(result, HttpStatus.OK))
@@ -39,7 +39,7 @@ public class AccountController {
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
-    @RequestMapping(method = RequestMethod.GET, value = "/account")
+    @RequestMapping(method = RequestMethod.GET, value = "/admin/account")
     public ResponseEntity<Accounts> getAll() {
         return new ResponseEntity<>(this.accountRepository.findAll(), HttpStatus.OK);
     }

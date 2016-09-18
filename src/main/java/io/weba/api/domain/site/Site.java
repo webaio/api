@@ -35,6 +35,9 @@ public class Site {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @Transient
+    private Tracker tracker;
+
     public Site(UUID id, String name, Timezone timezone, Account account, URL url) {
         this.id = id;
         this.name = name;
@@ -63,5 +66,13 @@ public class Site {
 
     public URL getUrl() {
         return url;
+    }
+
+    public void resolveTracker(Tracker tracker) {
+        this.tracker = tracker;
+    }
+
+    public Tracker getTracker() {
+        return this.tracker;
     }
 }
