@@ -16,7 +16,6 @@ import java.security.Principal;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-
 import javax.validation.Valid;
 
 @RestController
@@ -64,7 +63,8 @@ public class SiteController {
     public ResponseEntity<Site> get(@PathVariable String siteUuid, Principal principal) throws UserWithIdDoesNotExist {
         User user = this.userRepository.findBy(principal.getName()).orElseThrow(UserWithIdDoesNotExist::new);
 
-        return this.siteRepository.findBy(UUID.fromString(siteUuid), user.getAccount())
+        return this.siteRepository
+                .findBy(UUID.fromString(siteUuid), user.getAccount())
                 .map(result -> new ResponseEntity<>(result, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -74,7 +74,8 @@ public class SiteController {
     public ResponseEntity remove(@PathVariable String siteUuid, Principal principal) throws UserWithIdDoesNotExist {
         User user = this.userRepository.findBy(principal.getName()).orElseThrow(UserWithIdDoesNotExist::new);
 
-        return this.siteRepository.findBy(UUID.fromString(siteUuid), user.getAccount())
+        return this.siteRepository
+                .findBy(UUID.fromString(siteUuid), user.getAccount())
                 .map(result -> {
                     this.siteRepository.remove(result);
 
