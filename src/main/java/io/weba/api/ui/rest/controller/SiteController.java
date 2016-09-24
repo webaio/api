@@ -45,7 +45,7 @@ public class SiteController {
     @RequestMapping(method = RequestMethod.GET, value = "/site")
     public ResponseEntity<Sites> getAllFromAccount(Principal principal) throws UserWithIdDoesNotExist {
         User user = this.userRepository.findBy(principal.getName()).orElseThrow(UserWithIdDoesNotExist::new);
-        Sites sites = this.siteRepository.findAllFor(user.getAccount());
+        Sites sites = this.siteRepository.findBy(user.getAccount());
 
         return new ResponseEntity<>(sites, HttpStatus.OK);
     }

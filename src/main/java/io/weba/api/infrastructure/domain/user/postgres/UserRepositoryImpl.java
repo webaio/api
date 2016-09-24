@@ -1,9 +1,12 @@
 package io.weba.api.infrastructure.domain.user.postgres;
 
+import io.weba.api.domain.account.Account;
 import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
+import io.weba.api.domain.user.Users;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +52,36 @@ public class UserRepositoryImpl implements UserRepository {
                 .uniqueResult();
 
         return Optional.ofNullable((User) result);
+    }
+
+    @Override
+    @Transactional
+    public Users findBy(Account account) {
+        Users users = new Users();
+        @SuppressWarnings({"unchecked"})
+        List<User> list = this.sessionFactory
+                .getCurrentSession()
+                .createCriteria(User.class)
+                .add(Restrictions.eq("account", account))
+                .list();
+
+        list.stream().forEach(item->users.add((User) item));
+
+        return users;
+    }
+
+    @Override
+    @Transactional
+    public Users findAll() {
+        Users users = new Users();
+        @SuppressWarnings({"unchecked"})
+        List<User> list = this.sessionFactory
+                .getCurrentSession()
+                .createCriteria(User.class)
+                .list();
+
+        list.stream().forEach(item->users.add((User) item));
+
+        return users;
     }
 }

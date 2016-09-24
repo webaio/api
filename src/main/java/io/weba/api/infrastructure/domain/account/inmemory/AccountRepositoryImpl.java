@@ -3,7 +3,6 @@ package io.weba.api.infrastructure.domain.account.inmemory;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.account.Accounts;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,12 +17,12 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public void add(Account account) {
-        list.add(account);
+        this.list.add(account);
     }
 
     @Override
     public Optional<Account> findBy(UUID accountId) {
-        for (Account account : list) {
+        for (Account account : this.list) {
             if (account.getId() == accountId) {
                 return Optional.of(account);
             }

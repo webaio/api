@@ -9,6 +9,7 @@ import io.weba.api.domain.oauth.OauthClientDetailsRepository;
 import io.weba.api.domain.role.Role;
 import io.weba.api.domain.role.RoleRepository;
 import io.weba.api.domain.user.UserRepository;
+import io.weba.api.ui.rest.service.AppEnvironment;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import java.util.UUID;
@@ -24,6 +25,7 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
     private final OauthClientDetailsRepository oauthClientDetailsRepository;
+    private final AppEnvironment appEnvironment;
 
     private static final String ACCOUNT_UUID = "79d9a686-bff8-4f49-a4f5-6bb00497b7c3";
     private static final String ACCOUNT_NAME = "Default";
@@ -60,18 +62,25 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
             RoleRepository roleRepository,
             AccountRepository accountRepository,
             UserRepository userRepository,
-            OauthClientDetailsRepository oauthClientDetailsRepository
+            OauthClientDetailsRepository oauthClientDetailsRepository,
+            AppEnvironment appEnvironment
     ) {
         this.domainEventPublisher = domainEventPublisher;
         this.roleRepository = roleRepository;
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
         this.oauthClientDetailsRepository = oauthClientDetailsRepository;
+        this.appEnvironment = appEnvironment;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+        if (this.appEnvironment.getName().equals("testing")) {
+            return;
+        }
+
         boolean present = this
                 .accountRepository
                 .findBy(UUID.fromString(ACCOUNT_UUID))

@@ -36,7 +36,7 @@ public class SiteRepositoryImpl implements SiteRepository {
 
     @Override
     @Transactional
-    public Sites findAllFor(Account account) {
+    public Sites findBy(Account account) {
         Sites sites = new Sites();
         @SuppressWarnings({"unchecked"})
         List<Site> list = this.sessionFactory

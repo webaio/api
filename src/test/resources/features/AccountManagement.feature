@@ -3,19 +3,18 @@ Feature: As I user i would like to manage my account
   Scenario: Configuring site to track using javascript tracker
     Given configured account with name "Weba"
     And logged as an user with admin role
-    When I decide to create site with configuration:
+    When I decide to create site with configuration
     | name           | url            | timezone      |
     | Weba main site | http://weba.io | Europe/Warsaw |
-    Then I should see configured tracker with given javascript code:
-    | code              |
-    | <script></script> |
+    Then I should see configured tracker with given javascript code
   Scenario: Adding new user to my account
     Given configured account with name "Weba"
-    And logged as a user with super admin role
-    When I decide to create new account with read only role:
-    | username      | password  |
-    | test@weba.io  | test      |
+    And logged as an user with admin role
+    When I decide to create new account with read only role
+    | username      | password  | first name | last name  |
+    | test@weba.io  | test      | David      | Bowie      |
     Then I should see create user with username "test@weba.io"
   Scenario: Promoting existing user to admin role
     Given configured account with name "Weba"
-    And logged as a user
+    And logged as an user with admin role
+    When I promote user "test@weba.io" to role admin

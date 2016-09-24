@@ -10,7 +10,7 @@ public interface SiteRepository {
 
     void remove(Site site);
 
-    Sites findAllFor(Account account);
+    Sites findBy(Account account);
 
     Sites findAll();
 
