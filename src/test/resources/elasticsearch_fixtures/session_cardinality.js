@@ -1,0 +1,362 @@
+[
+{
+        "id" : "f339ae7e-41a2-4c87-9bef-76f7e6e52db5",
+        "type" : "page_view",
+        "visitor" : {
+          "id" : "99d86c3a-be10-4312-8aab-4f2fbcbf56a1",
+          "first_visit_date" : "2016-09-26T17:22:32.272+0000"
+        },
+        "session" : {
+          "id" : "9469e5bf-e3ef-43b8-9b01-ba2bbe98d9e2",
+          "start_date" : "2016-09-26T17:22:32.272+0000",
+          "end_date" : "2016-09-26T17:52:32.000+0000"
+        },
+        "enriched" : {
+          "localization" : {
+            "country" : "USA",
+            "region" : "MA",
+            "city" : "Northborough",
+            "postal_code" : "01532",
+            "continent" : "NA",
+            "geo" : {
+              "lat" : 42.3218,
+              "lon" : -71.635
+            }
+          },
+          "device" : {
+            "fingerprint" : {
+              "fingerprint" : "cf3691d427af49799db5ae14868b2a40781552e2605b6542e5bae6f90d588571",
+              "quality" : 34
+            },
+            "features" : {
+              "browser_name" : "Chrome",
+              "browser_vendor" : null,
+              "browser_version" : "49",
+              "hardware_model" : null,
+              "hardware_name" : null,
+              "hardware_vendor" : null,
+              "is_console" : false,
+              "is_crawler" : false,
+              "is_e_reader" : false,
+              "is_mobile" : false,
+              "is_small_screen" : false,
+              "is_smart_phone" : false,
+              "is_smart_watch" : false,
+              "is_tablet" : false,
+              "is_tv" : false,
+              "platform_name" : "Mac OS X",
+              "platform_vendor" : null,
+              "platform_version" : "10.9",
+              "available_height" : 1050,
+              "available_width" : 1680,
+              "color_depth" : 24,
+              "height" : 557,
+              "is_ad_block" : false,
+              "is_canvas" : false,
+              "is_cookie" : false,
+              "is_flash" : false,
+              "is_java" : false,
+              "is_javascript" : false,
+              "is_local_storage" : false,
+              "is_pdf" : false,
+              "is_quick_time" : false,
+              "is_real_player" : false,
+              "is_session_storage" : false,
+              "is_touch" : false,
+              "width" : 1674
+            }
+          }
+        },
+        "payload" : {
+          "url_parts" : {
+            "protocol" : "http",
+            "host" : "requests.readthedocs.org",
+            "query" : null,
+            "authority" : "requests.readthedocs.org",
+            "path" : "/release-process/",
+            "user_info" : null
+          },
+          "document_encoding" : "UTF-8",
+          "tracker_id" : "f878da1c-822e-4046-86cb-3e515ebcdce0",
+          "user_agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36",
+          "url_full" : "http://requests.readthedocs.org/release-process/",
+          "document_title" : "lorem+ipsum+lorem",
+          "remote_addr" : "41.223.142.216",
+          "user_language" : "pl"
+        },
+        "dates" : {
+          "client" : "2016-09-26T17:22:32.333+0000",
+          "server" : "2016-09-26T17:22:32.000+0000"
+        }
+      },
+{
+        "id" : "f339ae7e-41a2-4c87-9bef-76f7e6e52db5",
+        "type" : "page_view",
+        "visitor" : {
+          "id" : "99d86c3a-be10-4312-8aab-4f2fbcbf56a1",
+          "first_visit_date" : "2016-09-26T17:22:32.272+0000"
+        },
+        "session" : {
+          "id" : "9469e5bf-e3ef-43b8-9b01-ba2bbe98d9e2",
+          "start_date" : "2016-09-26T17:22:32.272+0000",
+          "end_date" : "2016-09-26T17:52:32.000+0000"
+        },
+        "enriched" : {
+          "localization" : {
+            "country" : "USA",
+            "region" : "MA",
+            "city" : "Northborough",
+            "postal_code" : "01532",
+            "continent" : "NA",
+            "geo" : {
+              "lat" : 42.3218,
+              "lon" : -71.635
+            }
+          },
+          "device" : {
+            "fingerprint" : {
+              "fingerprint" : "cf3691d427af49799db5ae14868b2a40781552e2605b6542e5bae6f90d588571",
+              "quality" : 34
+            },
+            "features" : {
+              "browser_name" : "Chrome",
+              "browser_vendor" : null,
+              "browser_version" : "49",
+              "hardware_model" : null,
+              "hardware_name" : null,
+              "hardware_vendor" : null,
+              "is_console" : false,
+              "is_crawler" : false,
+              "is_e_reader" : false,
+              "is_mobile" : false,
+              "is_small_screen" : false,
+              "is_smart_phone" : false,
+              "is_smart_watch" : false,
+              "is_tablet" : false,
+              "is_tv" : false,
+              "platform_name" : "Mac OS X",
+              "platform_vendor" : null,
+              "platform_version" : "10.9",
+              "available_height" : 1050,
+              "available_width" : 1680,
+              "color_depth" : 24,
+              "height" : 557,
+              "is_ad_block" : false,
+              "is_canvas" : false,
+              "is_cookie" : false,
+              "is_flash" : false,
+              "is_java" : false,
+              "is_javascript" : false,
+              "is_local_storage" : false,
+              "is_pdf" : false,
+              "is_quick_time" : false,
+              "is_real_player" : false,
+              "is_session_storage" : false,
+              "is_touch" : false,
+              "width" : 1674
+            }
+          }
+        },
+        "payload" : {
+          "url_parts" : {
+            "protocol" : "http",
+            "host" : "requests.readthedocs.org",
+            "query" : null,
+            "authority" : "requests.readthedocs.org",
+            "path" : "/release-process/",
+            "user_info" : null
+          },
+          "document_encoding" : "UTF-8",
+          "tracker_id" : "f878da1c-822e-4046-86cb-3e515ebcdce0",
+          "user_agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36",
+          "url_full" : "http://requests.readthedocs.org/release-process/",
+          "document_title" : "lorem+ipsum+lorem",
+          "remote_addr" : "41.223.142.216",
+          "user_language" : "pl"
+        },
+        "dates" : {
+          "client" : "2016-09-26T17:22:32.333+0000",
+          "server" : "2016-09-26T17:22:32.000+0000"
+        }
+      },
+{
+        "id" : "2f6d9717-dac3-4305-9787-bb9d13799f86",
+        "type" : "page_view",
+        "visitor" : {
+          "id" : "ecaa0701-1956-48f5-926d-7e1ed333f344",
+          "first_visit_date" : "2016-09-26T17:22:33.120+0000"
+        },
+        "session" : {
+          "id" : "c9de9ced-8e03-44ee-be30-9975b39febaf",
+          "start_date" : "2016-09-26T17:22:33.120+0000",
+          "end_date" : "2016-09-26T17:52:35.000+0000"
+        },
+        "enriched" : {
+          "localization" : {
+            "country" : "USA",
+            "region" : "MA",
+            "city" : "Northborough",
+            "postal_code" : "01532",
+            "continent" : "NA",
+            "geo" : {
+              "lat" : 42.3218,
+              "lon" : -71.635
+            }
+          },
+          "device" : {
+            "fingerprint" : {
+              "fingerprint" : "ca447b9d4265d830aef983e1dd2c19be1ba3afa793fe060578c8c95cabce0f7c",
+              "quality" : 34
+            },
+            "features" : {
+              "browser_name" : "Chrome",
+              "browser_vendor" : null,
+              "browser_version" : "49",
+              "hardware_model" : null,
+              "hardware_name" : null,
+              "hardware_vendor" : null,
+              "is_console" : false,
+              "is_crawler" : false,
+              "is_e_reader" : false,
+              "is_mobile" : false,
+              "is_small_screen" : false,
+              "is_smart_phone" : false,
+              "is_smart_watch" : false,
+              "is_tablet" : false,
+              "is_tv" : false,
+              "platform_name" : "Mac OS X",
+              "platform_vendor" : null,
+              "platform_version" : "10.11",
+              "available_height" : 1050,
+              "available_width" : 1680,
+              "color_depth" : 24,
+              "height" : 557,
+              "is_ad_block" : false,
+              "is_canvas" : false,
+              "is_cookie" : false,
+              "is_flash" : false,
+              "is_java" : false,
+              "is_javascript" : false,
+              "is_local_storage" : false,
+              "is_pdf" : false,
+              "is_quick_time" : false,
+              "is_real_player" : false,
+              "is_session_storage" : false,
+              "is_touch" : false,
+              "width" : 1674
+            }
+          }
+        },
+        "payload" : {
+          "url_parts" : {
+            "protocol" : "http",
+            "host" : "example.com",
+            "query" : null,
+            "authority" : "example.com",
+            "path" : "/tutorials/running-multi-node-storm-cluster/",
+            "user_info" : null
+          },
+          "document_encoding" : "UTF-8",
+          "tracker_id" : "f878da1c-822e-4046-86cb-3e515ebcdce0",
+          "user_agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36",
+          "url_full" : "http://example.com/tutorials/running-multi-node-storm-cluster/",
+          "document_title" : "lorem+ipsum+lorem",
+          "remote_addr" : "61.106.252.142",
+          "user_language" : "pl"
+        },
+        "dates" : {
+          "client" : "2016-09-26T17:22:35.966+0000",
+          "server" : "2016-09-26T17:22:36.000+0000"
+        }
+      },
+{
+        "id" : "79ffdb0e-adcd-4927-abf1-3c432d56183d",
+        "type" : "page_view",
+        "visitor" : {
+          "id" : "bdca0c23-fd35-48d5-b762-7a37f638e924",
+          "first_visit_date" : "2016-09-26T17:22:32.834+0000"
+        },
+        "session" : {
+          "id" : "e7733bc2-2b7f-4f63-ba75-75d47600e493",
+          "start_date" : "2016-09-26T17:22:32.834+0000",
+          "end_date" : "2016-09-26T17:52:38.000+0000"
+        },
+        "enriched" : {
+          "localization" : {
+            "country" : "USA",
+            "region" : "MA",
+            "city" : "Northborough",
+            "postal_code" : "01532",
+            "continent" : "NA",
+            "geo" : {
+              "lat" : 42.3218,
+              "lon" : -71.635
+            }
+          },
+          "device" : {
+            "fingerprint" : {
+              "fingerprint" : "10328918166f55c714a3a736a83a6c416e00d193ffe8ce60442f8dc609b5a188",
+              "quality" : 34
+            },
+            "features" : {
+              "browser_name" : "Internet Explorer",
+              "browser_vendor" : null,
+              "browser_version" : "11.0",
+              "hardware_model" : null,
+              "hardware_name" : null,
+              "hardware_vendor" : null,
+              "is_console" : false,
+              "is_crawler" : false,
+              "is_e_reader" : false,
+              "is_mobile" : false,
+              "is_small_screen" : false,
+              "is_smart_phone" : false,
+              "is_smart_watch" : false,
+              "is_tablet" : false,
+              "is_tv" : false,
+              "platform_name" : "Windows",
+              "platform_vendor" : null,
+              "platform_version" : "7",
+              "available_height" : 1050,
+              "available_width" : 1680,
+              "color_depth" : 24,
+              "height" : 557,
+              "is_ad_block" : false,
+              "is_canvas" : false,
+              "is_cookie" : false,
+              "is_flash" : false,
+              "is_java" : false,
+              "is_javascript" : false,
+              "is_local_storage" : false,
+              "is_pdf" : false,
+              "is_quick_time" : false,
+              "is_real_player" : false,
+              "is_session_storage" : false,
+              "is_touch" : false,
+              "width" : 1674
+            }
+          }
+        },
+        "payload" : {
+          "url_parts" : {
+            "protocol" : "http",
+            "host" : "requests.readthedocs.org",
+            "query" : null,
+            "authority" : "requests.readthedocs.org",
+            "path" : "/release-process/",
+            "user_info" : null
+          },
+          "document_encoding" : "UTF-8",
+          "tracker_id" : "f878da1c-822e-4046-86cb-3e515ebcdce0",
+          "user_agent" : "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
+          "url_full" : "http://requests.readthedocs.org/release-process/",
+          "document_title" : "lorem+ipsum+lorem",
+          "remote_addr" : "131.197.85.214",
+          "user_language" : "pl"
+        },
+        "dates" : {
+          "client" : "2016-09-01T17:22:38.069+0000",
+          "server" : "2016-09-01T17:22:38.000+0000"
+        }
+      }
+]

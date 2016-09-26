@@ -12,7 +12,7 @@ plugins {
 }
 
 flyway {
-    url = 'jdbc:postgresql://localhost:5432/weba?user=postgres&password=mysecretpassword'
+    url = 'jdbc:postgresql://100.0.0.1:5432/weba?user=postgres&password=mysecretpassword'
     user = 'postgres'
 }
 
@@ -43,6 +43,7 @@ dependencies {
     //db
     compile("org.postgresql:postgresql:9.4-1206-jdbc42")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.data:spring-data-elasticsearch:2.0.2.RELEASE");
 
     //devtools
     compile("org.springframework.boot:spring-boot-devtools")
@@ -52,6 +53,7 @@ dependencies {
     compile("info.cukes:cucumber-java:1.2.0")
     compile("info.cukes:cucumber-junit:1.2.0")
     compile("info.cukes:cucumber-spring:1.2.0")
+    testCompile(group: 'com.sun.jna', name: 'jna', version: '3.0.9')
     testCompile("junit:junit")
 }
 
