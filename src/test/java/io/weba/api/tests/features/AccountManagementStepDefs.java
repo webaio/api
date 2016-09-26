@@ -1,9 +1,6 @@
-package io.weba.api.tests.integration.domain.account;
+package io.weba.api.tests.features;
 
 import static org.junit.Assert.*;
-
-import cucumber.api.PendingException;
-import io.weba.api.TestDomainContextConfig;
 import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.application.event.AddNewSiteEvent;
@@ -16,7 +13,8 @@ import io.weba.api.domain.site.Site;
 import io.weba.api.domain.site.SiteRepository;
 import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
-import io.weba.api.ui.rest.config.Application;
+import io.weba.api.domain.user.Users;
+import io.weba.api.ui.rest.application.SpringApplication;
 import org.springframework.boot.test.context.SpringBootContextLoader;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +26,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@ContextConfiguration(classes = {Application.class, TestDomainContextConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {SpringApplication.class, AccountManagementConfig.class}, loader = SpringBootContextLoader.class)
 @WebAppConfiguration
 public class AccountManagementStepDefs {
     @Autowired
@@ -63,7 +61,7 @@ public class AccountManagementStepDefs {
     @And("^logged as an user with admin role$")
     public void loggedAsAnUserWithAdminRole() throws Throwable {
         UUID roleId = UUID.randomUUID();
-        this.roleRepository.add(new Role(roleId, Role.ROLE_SUPER_ADMIN));
+        this.roleRepository.add(new Role(roleId, Role.ROLE_ADMIN));
 
         AddUserEvent addUserEvent = new AddUserEvent();
         addUserEvent.accountId = this.account.getId();
@@ -96,13 +94,41 @@ public class AccountManagementStepDefs {
 
     @When("^I decide to create new account with read only role$")
     public void iDecideToCreateNewAccountWithReadOnlyRole(List<String> entries) throws Throwable {
+        UUID roleId = UUID.randomUUID();
+        this.roleRepository.add(new Role(roleId, Role.ROLE_USER));
+
+        AddUserEvent addUserEvent = new AddUserEvent();
+        addUserEvent.accountId = this.user.getAccount().getId();
+        addUserEvent.firstName = entries.get(2);
+        addUserEvent.lastName = entries.get(3);
+        addUserEvent.username = entries.get(0);
+        addUserEvent.password = entries.get(1);
+        addUserEvent.roleId = roleId;
+        this.domainEventPublisher.publish(addUserEvent);
+        User user = this.userRepository.findBy(entries.get(0)).get();
+
+        assertEquals(entries.get(0), user.getUsername());
     }
 
     @Then("^I should see create user with username \"([^\"]*)\"$")
-    public void iShouldSeeCreateUserWithUsername(String arg0) throws Throwable {
+    public void iShouldSeeCreateUserWithUsername(String username) throws Throwable {
+        Boolean isUserExisting = false;
+        Users userForAccount = this.userRepository.findBy(this.user.getAccount());
+
+        for (User user: userForAccount) {
+            if (user.getUsername().equals(username)) {
+                isUserExisting = true;
+            }
+        }
+
+        assertTrue(isUserExisting);
     }
 
     @When("^I promote user \"([^\"]*)\" to role admin$")
     public void iPromoteUserToRoleAdmin(String arg0) throws Throwable {
+    }
+
+    @Then("^I should see user \"([^\"]*)\" as a admin$")
+    public void iShouldSeeUserAsAAdmin(String arg0) throws Throwable {
     }
 }

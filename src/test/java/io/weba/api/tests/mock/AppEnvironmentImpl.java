@@ -1,4 +1,4 @@
-package io.weba.api.mock;
+package io.weba.api.tests.mock;
 
 import io.weba.api.ui.rest.service.AppEnvironment;
 
