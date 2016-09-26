@@ -1,4 +1,4 @@
-package io.weba.api.infrastructure.elasticsearch;
+package io.weba.api.tests.elasticsearch;
 
 import org.junit.Before;
 

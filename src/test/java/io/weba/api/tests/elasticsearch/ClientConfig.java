@@ -1,4 +1,4 @@
-package io.weba.api.infrastructure.elasticsearch;
+package io.weba.api.tests.elasticsearch;
 
 import io.weba.api.rest.config.properties.ElasticsearchProperties;
 import org.elasticsearch.client.Client;
