@@ -2,10 +2,11 @@ package io.weba.api.domain.user;
 
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.role.Role;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Table(name = "users")
 @Entity
@@ -14,8 +15,8 @@ public class User implements Serializable {
     @Column
     private UUID id;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -34,9 +35,12 @@ public class User implements Serializable {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public User(UUID userId, String email, String password, Account account, String firstName, String lastName, Role role) {
+    @Column(name = "enabled")
+    private Boolean enabled = true;
+
+    public User(UUID userId, String username, String password, Account account, String firstName, String lastName, Role role) {
         this.id = userId;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.account = account;
         this.firstName = firstName;
@@ -51,10 +55,12 @@ public class User implements Serializable {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
+    @JsonIgnore
+    @JsonProperty(value = "password")
     public String getPassword() {
         return password;
     }
@@ -73,5 +79,9 @@ public class User implements Serializable {
 
     public Account getAccount() {
         return account;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
     }
 }

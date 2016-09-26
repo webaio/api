@@ -1,6 +1,6 @@
 package io.weba.api.tests.elasticsearch;
 
-import io.weba.api.rest.config.properties.ElasticsearchProperties;
+import io.weba.api.ui.rest.config.properties.ElasticsearchProperties;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;

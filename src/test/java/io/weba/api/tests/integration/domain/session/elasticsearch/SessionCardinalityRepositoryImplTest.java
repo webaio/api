@@ -4,7 +4,7 @@ import io.weba.api.domain.session.SessionCardinality;
 import io.weba.api.domain.session.SessionCardinalityCriteria;
 import io.weba.api.infrastructure.domain.session.elasticsearch.SessionCardinalityRepositoryImpl;
 import io.weba.api.tests.elasticsearch.EventsTestSuite;
-import io.weba.api.rest.application.SpringApplication;
+import io.weba.api.ui.rest.application.SpringApplication;
 import io.weba.api.tests.elasticsearch.ClientConfig;
 import org.joda.time.DateTime;
 import org.junit.Assert;

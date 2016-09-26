@@ -1,7 +1,7 @@
 package io.weba.api.infrastructure.domain.session.elasticsearch;
 
 import io.weba.api.domain.session.SessionCardinalityCriteria;
-import io.weba.api.rest.config.properties.ElasticsearchProperties;
+import io.weba.api.ui.rest.config.properties.ElasticsearchProperties;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;

@@ -4,6 +4,7 @@ import io.weba.api.domain.oauth.OauthClientDetails;
 import io.weba.api.domain.oauth.OauthClientDetailsRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public class OauthClientDetailsRepositoryImpl implements OauthClientDetailsRepos
     }
 
     @Override
-    public OauthClientDetails findBy(String clientId) {
+    public Optional<OauthClientDetails> findBy(String clientId) {
         Object result = this.sessionFactory
                 .getCurrentSession()
                 .createCriteria(OauthClientDetails.class)
@@ -30,6 +31,6 @@ public class OauthClientDetailsRepositoryImpl implements OauthClientDetailsRepos
                 .setMaxResults(1)
                 .uniqueResult();
 
-        return (OauthClientDetails) result;
+        return Optional.ofNullable((OauthClientDetails) result);
     }
 }

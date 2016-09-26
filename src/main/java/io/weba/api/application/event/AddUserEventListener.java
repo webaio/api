@@ -1,8 +1,10 @@
 package io.weba.api.application.event;
 
 import io.weba.api.domain.account.Account;
+import io.weba.api.domain.account.AccountForGivenIdNotFound;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.role.Role;
+import io.weba.api.domain.role.RoleForGivenIdNotFound;
 import io.weba.api.domain.role.RoleRepository;
 import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
@@ -29,21 +31,25 @@ public class AddUserEventListener {
     }
 
     @EventListener
-    public void handle(AddUserEvent addUserEvent) {
-        Account account = this.accountRepository.findBy(addUserEvent.accountId());
-        Role role = this.roleRepository.findBy(addUserEvent.roleId());
+    public void handle(AddUserEvent addUserEvent) throws AccountForGivenIdNotFound, RoleForGivenIdNotFound {
+        Role role = this
+                .roleRepository
+                .findBy(addUserEvent.roleId())
+                .orElseThrow(RoleForGivenIdNotFound::new);
+        Account account = this
+                .accountRepository
+                .findBy(addUserEvent.accountId())
+                .orElseThrow(AccountForGivenIdNotFound::new);
 
-        if (account != null) {
-            User user = new User(
-                    addUserEvent.userId(),
-                    addUserEvent.email(),
-                    new BCryptPasswordEncoder().encode(addUserEvent.password()),
-                    account,
-                    addUserEvent.firstName(),
-                    addUserEvent.lastName(),
-                    role
-            );
-            this.userRepository.add(user);
-        }
+        User user = new User(
+                addUserEvent.userId(),
+                addUserEvent.username(),
+                new BCryptPasswordEncoder().encode(addUserEvent.password()),
+                account,
+                addUserEvent.firstName(),
+                addUserEvent.lastName(),
+                role
+        );
+        this.userRepository.add(user);
     }
 }

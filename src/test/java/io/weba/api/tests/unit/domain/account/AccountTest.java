@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class AccountTest {
     @Test
     public void itGetsAccountNameAndId() {
-        Account test = new Account("Test");
+        Account test = new Account(UUID.randomUUID(), "Test");
 
         assertEquals(test.getName(), "Test");
         assertEquals(test.getId().getClass(), UUID.class);

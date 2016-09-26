@@ -2,9 +2,10 @@ package io.weba.api.infrastructure.domain.account.inmemory;
 
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
-
+import io.weba.api.domain.account.Accounts;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class AccountRepositoryImpl implements AccountRepository {
@@ -16,17 +17,22 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public void add(Account account) {
-        list.add(account);
+        this.list.add(account);
     }
 
     @Override
-    public Account findBy(UUID accountId) {
-        for (Account account : list) {
+    public Optional<Account> findBy(UUID accountId) {
+        for (Account account : this.list) {
             if (account.getId() == accountId) {
-                return account;
+                return Optional.of(account);
             }
         }
 
+        return Optional.empty();
+    }
+
+    @Override
+    public Accounts findAll() {
         return null;
     }
 }

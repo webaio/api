@@ -7,6 +7,10 @@ import java.util.UUID;
 @Table(name = "roles")
 @Entity
 public class Role implements Serializable {
+    public static String ROLE_USER = "ROLE_USER";
+    public static String ROLE_ADMIN = "ROLE_ADMIN";
+    public static String ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
+
     @Id
     @Column
     private UUID id;
