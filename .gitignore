@@ -5,3 +5,5 @@ build/
 .gradle
 classes
 target/
+src/main/resources/application.properties
+src/main/resources/elasticsearch.properties
