@@ -8,8 +8,6 @@ import io.weba.api.infrastructure.domain.account.inmemory.AccountRepositoryImpl;
 import io.weba.api.infrastructure.domain.role.inmemory.RoleRepositoryImpl;
 import io.weba.api.infrastructure.domain.site.inmemory.SiteRepositoryImpl;
 import io.weba.api.infrastructure.domain.user.inmemory.UserRepositoryImpl;
-import io.weba.api.tests.mock.AppEnvironmentImpl;
-import io.weba.api.ui.rest.service.AppEnvironment;
 import org.springframework.context.annotation.Bean;
 
 public class AccountManagementConfig {
@@ -26,11 +24,6 @@ public class AccountManagementConfig {
     @Bean(name = "userRepository")
     public UserRepository getUserRepository() {
         return new UserRepositoryImpl();
-    }
-
-    @Bean(name = "appEnvironment")
-    public AppEnvironment getAppEnvironment() {
-        return new AppEnvironmentImpl();
     }
 
     @Bean(name = "siteRepository")
