@@ -64,12 +64,12 @@ public class AccountManagementStepDefs {
         this.roleRepository.add(new Role(roleId, Role.ROLE_ADMIN));
 
         AddUserEvent addUserEvent = new AddUserEvent();
-        addUserEvent.accountId = this.account.getId();
+        addUserEvent.account = this.account;
         addUserEvent.firstName = "John";
         addUserEvent.lastName = "Doe";
         addUserEvent.username = "admin@weba.io";
         addUserEvent.password = "test";
-        addUserEvent.roleId = roleId;
+        addUserEvent.role = Role.ROLE_ADMIN;
 
         this.domainEventPublisher.publish(addUserEvent);
         this.user = this.userRepository.findBy("admin@weba.io").get();
@@ -78,7 +78,7 @@ public class AccountManagementStepDefs {
     @When("^I decide to create site with configuration$")
     public void iDecideToCreateSiteWithConfiguration(List<String> entries) throws Throwable {
         AddNewSiteEvent addNewSiteEvent = new AddNewSiteEvent();
-        addNewSiteEvent.accountId = this.user.getAccount().getId();
+        addNewSiteEvent.account = this.user.getAccount();
         addNewSiteEvent.name = entries.get(0);
         addNewSiteEvent.url = entries.get(1);
         addNewSiteEvent.timezone = entries.get(2);
@@ -98,12 +98,12 @@ public class AccountManagementStepDefs {
         this.roleRepository.add(new Role(roleId, Role.ROLE_USER));
 
         AddUserEvent addUserEvent = new AddUserEvent();
-        addUserEvent.accountId = this.user.getAccount().getId();
+        addUserEvent.account = this.user.getAccount();
         addUserEvent.firstName = entries.get(2);
         addUserEvent.lastName = entries.get(3);
         addUserEvent.username = entries.get(0);
         addUserEvent.password = entries.get(1);
-        addUserEvent.roleId = roleId;
+        addUserEvent.role = Role.ROLE_USER;
         this.domainEventPublisher.publish(addUserEvent);
         User user = this.userRepository.findBy(entries.get(0)).get();
 

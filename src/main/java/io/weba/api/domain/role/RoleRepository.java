@@ -7,4 +7,6 @@ public interface RoleRepository {
     void add(Role role);
 
     Optional<Role> findBy(UUID roleId);
+
+    Optional<Role> findBy(String name);
 }

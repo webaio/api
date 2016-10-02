@@ -1,6 +1,7 @@
 package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
+import io.weba.api.domain.account.Account;
 import io.weba.api.domain.timezone.Timezone;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,7 +21,7 @@ public class AddNewSiteEvent implements DomainEvent {
     @org.hibernate.validator.constraints.URL
     public String url;
 
-    public UUID accountId;
+    public Account account;
 
     private UUID siteId;
 
@@ -32,8 +33,8 @@ public class AddNewSiteEvent implements DomainEvent {
         return this.name;
     }
 
-    public UUID accountId() {
-        return this.accountId;
+    public Account account() {
+        return this.account;
     }
 
     public UUID siteId() {

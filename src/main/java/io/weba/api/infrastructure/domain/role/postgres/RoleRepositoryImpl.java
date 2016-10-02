@@ -37,4 +37,17 @@ public class RoleRepositoryImpl implements RoleRepository {
 
         return Optional.ofNullable((Role) result);
     }
+
+    @Override
+    @Transactional
+    public Optional<Role> findBy(String name) {
+        Object result = this.sessionFactory
+                .getCurrentSession()
+                .createCriteria(Role.class)
+                .add(Restrictions.eq("name", name))
+                .setMaxResults(1)
+                .uniqueResult();
+
+        return Optional.ofNullable((Role) result);
+    }
 }
