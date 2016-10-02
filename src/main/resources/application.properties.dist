@@ -4,6 +4,8 @@ spring.datasource.password=mysecretpassword
 
 logging.level.org.hibernate.SQL=DEBUG
 
+spring.profiles.active=development,production
+
 weba.admin.username = admin@weba.io
 weba.admin.password = !weba007
 weba.admin.first_name = John
