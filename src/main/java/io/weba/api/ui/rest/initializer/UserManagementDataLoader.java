@@ -10,17 +10,18 @@ import io.weba.api.domain.oauth.OauthClientDetailsRepository;
 import io.weba.api.domain.role.Role;
 import io.weba.api.domain.role.RoleRepository;
 import io.weba.api.domain.user.UserRepository;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import java.util.UUID;
-import org.springframework.context.annotation.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Component
-@Profile("development")
+@Profile({"development", "testing"})
 public class UserManagementDataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private final DomainEventPublisher domainEventPublisher;
     private final RoleRepository roleRepository;
@@ -28,34 +29,19 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     private final UserRepository userRepository;
     private final OauthClientDetailsRepository oauthClientDetailsRepository;
 
-    private static final String ACCOUNT_UUID = "79d9a686-bff8-4f49-a4f5-6bb00497b7c3";
-    private static final String ACCOUNT_NAME = "Default";
+    public static final UUID ACCOUNT_UUID = UUID.fromString("79d9a686-bff8-4f49-a4f5-6bb00497b7c3");
+    public static final String ACCOUNT_NAME = "Weba";
 
-    private static final String ROLE_USER_UUID = "e94ade03-f03d-4ba8-91a2-99adf5c6e39b";
+    public static final UUID ROLE_USER_UUID = UUID.fromString("e94ade03-f03d-4ba8-91a2-99adf5c6e39b");
+    public static final UUID ROLE_ADMIN_UUID = UUID.fromString("5ca1ce75-b336-4232-9641-f7a843920689");
+    public static final UUID ROLE_SUPER_ADMIN_UUID = UUID.fromString("1c388058-ad68-49a0-af14-efe26ea0780e");
 
-    private static final String ROLE_ADMIN_UUID = "5ca1ce75-b336-4232-9641-f7a843920689";
+    public static final UUID USER_USER_UUID = UUID.fromString("6e781882-1617-4b85-9f7a-d455298debc4");
+    public static final UUID USER_ADMIN_UUID = UUID.fromString("4aae5651-3dce-420b-a077-893fcfc5548b");
+    public static final UUID USER_SUPER_ADMIN_UUID = UUID.fromString("b18e510d-9956-4707-86f7-663d631e01a9");
 
-    private static final String ROLE_SUPER_ADMIN_UUID = "1c388058-ad68-49a0-af14-efe26ea0780e";
-
-    private static final String USER_UUID = "b99d86ef-eead-480c-9b2b-a139635cadc5";
-
-    @Value("${weba.admin.username}")
-    public String userEmail;
-
-    @Value("${weba.admin.password}")
-    private String userPassword;
-
-    @Value("${weba.admin.first_name}")
-    private String userFirstName;
-
-    @Value("${weba.admin.last_name}")
-    private String userLastName;
-
-    @Value("${weba.admin.client_id}")
-    private String clientId;
-
-    @Value("${weba.admin.client_secret}")
-    private String clientSecret;
+    public static final UUID OAUTH_CLIENT_UUID = UUID.fromString("f1b1bde8-ccd5-46da-b1ab-8c8eb194d57d");
+    public static final UUID OAUTH_SECRET_UUID = UUID.fromString("ee29fd21-8852-496f-89ef-f3c6aea4a75c");
 
     @Autowired
     public UserManagementDataLoader(
@@ -75,25 +61,14 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
-        boolean present = this
-                .accountRepository
-                .findBy(UUID.fromString(ACCOUNT_UUID))
-                .isPresent();
-
-        if (!present) {
-            this.createAccount();
-        }
+        Optional<Account> account = this.createAccount();
 
         this.createRoles();
+        this.createUser(USER_USER_UUID, account.get(), Role.ROLE_USER, "user@weba.io", "Marco", "Wayne");
+        this.createUser(USER_ADMIN_UUID, account.get(), Role.ROLE_ADMIN, "admin@weba.io", "Tommy", "Lee");
+        this.createUser(USER_SUPER_ADMIN_UUID, account.get(), Role.ROLE_SUPER_ADMIN, "super_admin@weba.io", "Jessica", "Kovalski");
 
-        boolean isUserExists = this.userRepository.findBy(UUID.fromString(USER_UUID)).isPresent();
-
-        if (!isUserExists) {
-            this.createUser();
-        }
-
-        boolean isClientExists = this.oauthClientDetailsRepository.findBy(this.clientId).isPresent();
+        boolean isClientExists = this.oauthClientDetailsRepository.findBy(OAUTH_CLIENT_UUID.toString()).isPresent();
 
         if (!isClientExists) {
             this.createOauthClient();
@@ -101,49 +76,61 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     }
 
     @Transactional
-    private void createAccount() {
-        AddAccountEvent addAccountEvent = new AddAccountEvent(UUID.fromString(ACCOUNT_UUID));
-        addAccountEvent.name = ACCOUNT_NAME;
-        this.domainEventPublisher.publish(addAccountEvent);
+    private Optional<Account> createAccount() {
+        boolean present = this
+                .accountRepository
+                .findBy(ACCOUNT_UUID)
+                .isPresent();
+
+        if(!present) {
+            AddAccountEvent addAccountEvent = new AddAccountEvent(ACCOUNT_UUID);
+            addAccountEvent.name = ACCOUNT_NAME;
+            this.domainEventPublisher.publish(addAccountEvent);
+        }
+
+        return this.accountRepository.findBy(ACCOUNT_UUID);
     }
 
     @Transactional
     private void createRoles() {
-        boolean isRoleUserExists = this.roleRepository.findBy(UUID.fromString(ROLE_USER_UUID)).isPresent();
-        boolean isRoleUserAdminExists =this.roleRepository.findBy(UUID.fromString(ROLE_ADMIN_UUID)).isPresent();
-        boolean isRoleUserSuperAdminExists =this.roleRepository.findBy(UUID.fromString(ROLE_SUPER_ADMIN_UUID)).isPresent();
+        boolean isRoleUserExists = this.roleRepository.findBy(ROLE_USER_UUID).isPresent();
+        boolean isRoleUserAdminExists = this.roleRepository.findBy(ROLE_ADMIN_UUID).isPresent();
+        boolean isRoleUserSuperAdminExists = this.roleRepository.findBy(ROLE_SUPER_ADMIN_UUID).isPresent();
 
         if (!isRoleUserExists) {
-            this.roleRepository.add(new Role(UUID.fromString(ROLE_USER_UUID), Role.ROLE_USER));
+            this.roleRepository.add(new Role(ROLE_USER_UUID, Role.ROLE_USER));
         }
 
         if (!isRoleUserAdminExists) {
-            this.roleRepository.add(new Role(UUID.fromString(ROLE_ADMIN_UUID), Role.ROLE_ADMIN));
+            this.roleRepository.add(new Role(ROLE_ADMIN_UUID, Role.ROLE_ADMIN));
         }
 
         if (!isRoleUserSuperAdminExists) {
-            this.roleRepository.add(new Role(UUID.fromString(ROLE_SUPER_ADMIN_UUID), Role.ROLE_SUPER_ADMIN));
+            this.roleRepository.add(new Role(ROLE_SUPER_ADMIN_UUID, Role.ROLE_SUPER_ADMIN));
         }
     }
 
     @Transactional
-    private void createUser() {
-        AddUserEvent addUserEvent = new AddUserEvent(UUID.fromString(USER_UUID));
-        addUserEvent.account = this.accountRepository.findBy(UUID.fromString(ACCOUNT_UUID)).get();
-        addUserEvent.username = this.userEmail;
-        addUserEvent.firstName = this.userFirstName;
-        addUserEvent.lastName = this.userLastName;
-        addUserEvent.password = this.userPassword;
-        addUserEvent.role = ROLE_SUPER_ADMIN_UUID;
+    private void createUser(UUID userId, Account account, String role, String username, String firstName, String lastName) {
+        boolean isUserExists = this.userRepository.findBy(userId).isPresent();
+        if (!isUserExists) {
+            AddUserEvent addUserEvent = new AddUserEvent(userId);
+            addUserEvent.account = account;
+            addUserEvent.username = username;
+            addUserEvent.firstName = firstName;
+            addUserEvent.lastName = lastName;
+            addUserEvent.password = "test";
+            addUserEvent.role = role;
 
-        this.domainEventPublisher.publish(addUserEvent);
+            this.domainEventPublisher.publish(addUserEvent);
+        }
     }
 
     @Transactional
     private void createOauthClient() {
         AddOauthClientDetailsEvent addOauthClientDetailsEvent = new AddOauthClientDetailsEvent(
-                UUID.fromString(this.clientId),
-                UUID.fromString(this.clientSecret)
+                OAUTH_CLIENT_UUID,
+                OAUTH_SECRET_UUID
         );
 
         this.domainEventPublisher.publish(addOauthClientDetailsEvent);

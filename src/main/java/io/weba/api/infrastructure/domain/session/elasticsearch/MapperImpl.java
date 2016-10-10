@@ -19,10 +19,10 @@ public class MapperImpl implements Mapper {
 
         Histogram histogram = response.getAggregations().get(Configuration.aggregateDateHistogramName);
         List<? extends Histogram.Bucket> buckets = histogram.getBuckets();
-        for(Histogram.Bucket bucket: buckets) {
-            for(Aggregation cardinality: bucket.getAggregations().asList()){
+        for (Histogram.Bucket bucket : buckets) {
+            for (Aggregation cardinality : bucket.getAggregations().asList()) {
                 Long value = ((Cardinality) cardinality).getValue();
-                DateTime date = (DateTime)bucket.getKey();
+                DateTime date = (DateTime) bucket.getKey();
                 list.add(new SessionCardinality(
                         date.toDate(),
                         value

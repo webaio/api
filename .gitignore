@@ -6,5 +6,8 @@ build/
 classes
 target/
 src/main/resources/application.properties
-src/test/resources/application.properties
 src/main/resources/elasticsearch.properties
+src/main/resources/oauth.properties
+src/main/resources/users.properties
+src/test/resources/application.properties
+

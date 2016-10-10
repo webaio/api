@@ -1,12 +1,13 @@
 package io.weba.api.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.role.Role;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Table(name = "users")
 @Entity

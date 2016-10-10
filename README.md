@@ -1,7 +1,1 @@
-#Develop application
-
-1. Create postgres database and set postgres access in `application.properties`
-2. Run migrations `.gradlew flywayMigrate -i`
-3. Compile and build project
-4. Try to login using email and password from `application.properties`
-
+[![CircleCI](https://circleci.com/gh/webaio/api.svg?style=svg)](https://circleci.com/gh/webaio/api)

@@ -1,12 +1,12 @@
 package io.weba.api.tests.unit.domain.session;
 
-import static org.junit.Assert.*;
-
 import io.weba.api.domain.session.SessionCardinalityCriteria;
 import org.junit.Test;
 
 import java.util.Date;
 import java.util.UUID;
+
+import static org.junit.Assert.assertSame;
 
 public class SessionCardinalityCriteriaTest {
     @Test

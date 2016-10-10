@@ -1,15 +1,19 @@
 package io.weba.api.infrastructure.domain.site.postgres;
 
 import io.weba.api.domain.account.Account;
-import io.weba.api.domain.site.*;
+import io.weba.api.domain.site.Site;
+import io.weba.api.domain.site.SiteRepository;
+import io.weba.api.domain.site.Sites;
+import io.weba.api.domain.site.TrackerRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class SiteRepositoryImpl implements SiteRepository {
@@ -45,7 +49,7 @@ public class SiteRepositoryImpl implements SiteRepository {
                 .add(Restrictions.eq("account", account))
                 .list();
 
-        list.stream().forEach(item->sites.add((Site) item));
+        list.stream().forEach(item -> sites.add((Site) item));
 
         return sites;
     }
@@ -60,7 +64,7 @@ public class SiteRepositoryImpl implements SiteRepository {
                 .createCriteria(Site.class)
                 .list();
 
-        list.stream().forEach(item->sites.add((Site) item));
+        list.stream().forEach(item -> sites.add((Site) item));
 
         return sites;
     }

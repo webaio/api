@@ -2,6 +2,7 @@ package io.weba.api.infrastructure.domain.role.inmemory;
 
 import io.weba.api.domain.role.Role;
 import io.weba.api.domain.role.RoleRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

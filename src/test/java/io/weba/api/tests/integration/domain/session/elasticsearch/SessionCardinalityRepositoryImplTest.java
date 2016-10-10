@@ -3,9 +3,11 @@ package io.weba.api.tests.integration.domain.session.elasticsearch;
 import io.weba.api.domain.session.SessionCardinality;
 import io.weba.api.domain.session.SessionCardinalityCriteria;
 import io.weba.api.infrastructure.domain.session.elasticsearch.SessionCardinalityRepositoryImpl;
-import io.weba.api.tests.elasticsearch.EventsTestSuite;
+import io.weba.api.tests.common.suite.TestSuite;
+import io.weba.api.tests.elasticsearch.config.ElasticsearchClientConfig;
+import io.weba.api.tests.elasticsearch.fixtures.EventsLoader;
 import io.weba.api.ui.rest.application.SpringApplication;
-import io.weba.api.tests.elasticsearch.ClientConfig;
+import io.weba.api.ui.rest.config.properties.ElasticsearchProperties;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,18 +24,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@ContextConfiguration(classes = {SpringApplication.class, ClientConfig.class}, loader = SpringBootContextLoader.class)
+@ContextConfiguration(classes = {SpringApplication.class, ElasticsearchClientConfig.class}, loader = SpringBootContextLoader.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-public class SessionCardinalityRepositoryImplTest extends EventsTestSuite {
+public class SessionCardinalityRepositoryImplTest extends TestSuite {
     @Autowired
     private SessionCardinalityRepositoryImpl repository;
 
-    @Override
+    @Autowired
+    private ElasticsearchProperties elasticsearchProperties;
+
+    @Autowired
+    private EventsLoader eventsLoader;
+
     @Before
     public void setUp() throws Exception {
-        super.setUp();
-        loadFixtures(elasticsearchProperties.getEventsIndexName(), "session_cardinality");
+        utils.recreate(elasticsearchProperties.getIndexName());
+        eventsLoader.load(elasticsearchProperties.getEventsTypeName(), "session_cardinality");
     }
 
     @Test

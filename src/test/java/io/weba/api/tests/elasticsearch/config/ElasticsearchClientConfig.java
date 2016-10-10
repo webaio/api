@@ -1,4 +1,4 @@
-package io.weba.api.tests.elasticsearch;
+package io.weba.api.tests.elasticsearch.config;
 
 import io.weba.api.ui.rest.config.properties.ElasticsearchProperties;
 import org.elasticsearch.client.Client;
@@ -11,9 +11,13 @@ import org.springframework.context.annotation.Bean;
 import java.io.File;
 import java.net.UnknownHostException;
 
-public class ClientConfig {
-    @Autowired
+public class ElasticsearchClientConfig {
     private ElasticsearchProperties elasticsearchProperties;
+
+    @Autowired
+    public ElasticsearchClientConfig(ElasticsearchProperties elasticsearchProperties) {
+        this.elasticsearchProperties = elasticsearchProperties;
+    }
 
     @Bean(name = "elasticsearchNode")
     public Node getNode() {
@@ -26,7 +30,7 @@ public class ClientConfig {
 
         new File(esDataPath).mkdirs();
 
-        settingsBuilder.put("node.name", ClientConfig.class);
+        settingsBuilder.put("node.name", ElasticsearchClientConfig.class);
         settingsBuilder.put("path.home", esDataHome);
         settingsBuilder.put("path.data", esDataPath);
         settingsBuilder.put("http.enabled", false);
