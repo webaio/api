@@ -4,6 +4,7 @@ import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.application.event.AddOauthClientDetailsEvent;
 import io.weba.api.application.event.AddUserEvent;
+import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.oauth.OauthClientDetailsRepository;
 import io.weba.api.domain.role.Role;
@@ -128,12 +129,12 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     @Transactional
     private void createUser() {
         AddUserEvent addUserEvent = new AddUserEvent(UUID.fromString(USER_UUID));
-        addUserEvent.accountId = UUID.fromString(ACCOUNT_UUID);
+        addUserEvent.account = this.accountRepository.findBy(UUID.fromString(ACCOUNT_UUID)).get();
         addUserEvent.username = this.userEmail;
         addUserEvent.firstName = this.userFirstName;
         addUserEvent.lastName = this.userLastName;
         addUserEvent.password = this.userPassword;
-        addUserEvent.roleId = UUID.fromString(ROLE_SUPER_ADMIN_UUID);
+        addUserEvent.role = ROLE_SUPER_ADMIN_UUID;
 
         this.domainEventPublisher.publish(addUserEvent);
     }

@@ -42,6 +42,20 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     @Transactional
+    public Optional<Account> findBy(String name) {
+        Object result = this.sessionFactory
+                .getCurrentSession()
+                .createCriteria(Account.class)
+                .add(Restrictions.eq("name", name))
+                .setMaxResults(1)
+                .uniqueResult();
+
+        return Optional.ofNullable((Account) result);
+    }
+
+
+    @Override
+    @Transactional
     public Accounts findAll() {
         Accounts accounts = new Accounts();
         @SuppressWarnings({"unchecked"})

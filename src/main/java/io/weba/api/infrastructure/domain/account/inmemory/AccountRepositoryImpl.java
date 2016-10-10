@@ -32,6 +32,17 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
+    public Optional<Account> findBy(String name) {
+        for (Account account : this.list) {
+            if (account.getName().equals(name)) {
+                return Optional.of(account);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public Accounts findAll() {
         return null;
     }

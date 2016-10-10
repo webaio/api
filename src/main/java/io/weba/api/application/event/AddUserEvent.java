@@ -2,6 +2,8 @@ package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
 import java.util.UUID;
+
+import io.weba.api.domain.account.Account;
 import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,9 +24,9 @@ public class AddUserEvent implements DomainEvent {
     @Size(min = 2, max = 50)
     public String password;
 
-    public UUID accountId;
+    public Account account;
 
-    public UUID roleId;
+    public String role;
 
     private UUID userId;
 
@@ -56,11 +58,11 @@ public class AddUserEvent implements DomainEvent {
         return this.password;
     }
 
-    public UUID accountId() {
-        return this.accountId;
+    public Account account() {
+        return this.account;
     }
 
-    public UUID roleId() {
-        return this.roleId;
+    public String role() {
+        return this.role;
     }
 }

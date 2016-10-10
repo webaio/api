@@ -2,6 +2,7 @@ package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
 import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonView;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -24,6 +25,7 @@ public class AddAccountEvent implements DomainEvent {
         return this.name;
     }
 
+    @JsonView()
     public UUID accountId() {
         return this.accountId;
     }

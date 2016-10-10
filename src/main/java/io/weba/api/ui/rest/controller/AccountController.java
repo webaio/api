@@ -24,10 +24,10 @@ public class AccountController {
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
     @RequestMapping(method = RequestMethod.POST, value = "/admin/account")
-    public ResponseEntity<UUID> create(@Valid @RequestBody AddAccountEvent addAccountEvent) {
+    public ResponseEntity<AddAccountEvent> create(@Valid @RequestBody AddAccountEvent addAccountEvent) {
         this.domainEventPublisher.publish(addAccountEvent);
 
-        return new ResponseEntity<>(addAccountEvent.accountId(), HttpStatus.CREATED);
+        return new ResponseEntity<>(addAccountEvent, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")

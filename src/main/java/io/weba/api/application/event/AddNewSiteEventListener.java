@@ -1,7 +1,6 @@
 package io.weba.api.application.event;
 
-import io.weba.api.domain.account.Account;
-import io.weba.api.domain.account.AccountForGivenIdNotFound;
+import io.weba.api.domain.account.AccountWithGivenUuidNotFound;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.site.Site;
 import io.weba.api.domain.site.SiteRepository;
@@ -21,17 +20,12 @@ public class AddNewSiteEventListener {
     }
 
     @EventListener
-    public void handle(AddNewSiteEvent addNewSiteEvent) throws AccountForGivenIdNotFound {
-        Account account = this
-                .accountRepository
-                .findBy(addNewSiteEvent.accountId())
-                .orElseThrow(AccountForGivenIdNotFound::new);
-
+    public void handle(AddNewSiteEvent addNewSiteEvent) throws AccountWithGivenUuidNotFound {
         Site site = new Site(
                 addNewSiteEvent.siteId(),
                 addNewSiteEvent.name(),
                 addNewSiteEvent.timezone(),
-                account,
+                addNewSiteEvent.account(),
                 addNewSiteEvent.url()
         );
 

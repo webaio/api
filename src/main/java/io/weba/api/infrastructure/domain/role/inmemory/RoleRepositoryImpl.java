@@ -29,4 +29,15 @@ public class RoleRepositoryImpl implements RoleRepository {
 
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Role> findBy(String name) {
+        for (Role role : this.list) {
+            if (role.getName().equals(name)) {
+                return Optional.of(role);
+            }
+        }
+
+        return Optional.empty();
+    }
 }
