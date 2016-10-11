@@ -3,7 +3,6 @@ package io.weba.api.infrastructure.domain.session.elasticsearch;
 import io.weba.api.domain.session.SessionCardinalityCriteria;
 import io.weba.api.ui.rest.config.properties.ElasticsearchProperties;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -31,8 +30,8 @@ public class ResultFetcherImpl implements ResultFetcher {
 
     @Override
     public SearchResponse fetchResponse(SessionCardinalityCriteria sessionCardinalityCriteria) {
-        return client.prepareSearch(elasticsearchProperties.getEventsIndexName())
-                .setTypes(elasticsearchProperties.getEventsIndexName())
+        return client.prepareSearch(elasticsearchProperties.getIndexName())
+                .setTypes(elasticsearchProperties.getEventsTypeName())
                 .addAggregation(new CardinalityAggregationFactory().create())
                 .setQuery(new QueryRangeFactory().createRangeQuery(sessionCardinalityCriteria))
                 .execute()

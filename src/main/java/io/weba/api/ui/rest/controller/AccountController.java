@@ -5,13 +5,14 @@ import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.account.Accounts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.util.UUID;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")

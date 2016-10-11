@@ -1,0 +1,4 @@
+elasticsearch.nodes = localhost:9300
+elasticsearch.clusterName = weba
+elasticsearch.indexName = weba
+elasticsearch.eventsTypeName = events

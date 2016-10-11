@@ -3,11 +3,12 @@ package io.weba.api.application.event;
 import io.weba.api.application.base.DomainEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.timezone.Timezone;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class AddNewSiteEvent implements DomainEvent {
     @NotNull

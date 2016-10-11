@@ -1,0 +1,37 @@
+machine:
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
+    - postgresql
+  timezone: "UTC"
+  java:
+    version: oraclejdk8
+
+dependencies:
+  override:
+    - sudo service mysql stop
+    - sudo service postgresql restart
+    - dropuser weba --if-exists
+    - createuser -s -d weba
+    - dropdb weba --if-exists
+    - createdb weba
+    - psql -U postgres -d postgres -c "alter user weba with password 'weba';"
+    - rm ./build.gradle
+    - cp ./circle/build.gradle ./build.gradle
+    - cp ./circle/application.properties.dist ./src/main/resources/application.properties
+    - cp ./circle/elasticsearch.properties.dist ./src/main/resources/elasticsearch.properties
+    - ./gradlew clean
+    - ./gradlew flywayMigrate -i
+    - ./gradlew build
+
+general:
+  artifacts:
+    - "build/libs/weba-api.jar"
+  branches:
+    only:
+      - master
+      - develop
+      - /feature.*/
+      - /hotfix.*/
+      - /bugfix.*/

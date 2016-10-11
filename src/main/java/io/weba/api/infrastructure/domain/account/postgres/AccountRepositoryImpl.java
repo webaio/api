@@ -5,12 +5,13 @@ import io.weba.api.domain.account.AccountRepository;
 import io.weba.api.domain.account.Accounts;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class AccountRepositoryImpl implements AccountRepository {
@@ -64,7 +65,7 @@ public class AccountRepositoryImpl implements AccountRepository {
                 .createCriteria(Account.class)
                 .list();
 
-        list.stream().forEach(item->accounts.add((Account) item));
+        list.stream().forEach(item -> accounts.add((Account) item));
 
         return accounts;
     }

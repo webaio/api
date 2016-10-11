@@ -6,12 +6,13 @@ import io.weba.api.domain.user.UserRepository;
 import io.weba.api.domain.user.Users;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -65,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
                 .add(Restrictions.eq("account", account))
                 .list();
 
-        list.stream().forEach(item->users.add((User) item));
+        list.stream().forEach(item -> users.add((User) item));
 
         return users;
     }
@@ -80,7 +81,7 @@ public class UserRepositoryImpl implements UserRepository {
                 .createCriteria(User.class)
                 .list();
 
-        list.stream().forEach(item->users.add((User) item));
+        list.stream().forEach(item -> users.add((User) item));
 
         return users;
     }

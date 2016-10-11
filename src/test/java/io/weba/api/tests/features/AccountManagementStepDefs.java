@@ -1,6 +1,9 @@
 package io.weba.api.tests.features;
 
-import static org.junit.Assert.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import io.weba.api.application.base.DomainEventPublisher;
 import io.weba.api.application.event.AddAccountEvent;
 import io.weba.api.application.event.AddNewSiteEvent;
@@ -15,16 +18,16 @@ import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
 import io.weba.api.domain.user.Users;
 import io.weba.api.ui.rest.application.SpringApplication;
-import org.springframework.boot.test.context.SpringBootContextLoader;
-import java.util.List;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @ContextConfiguration(classes = {SpringApplication.class, AccountManagementConfig.class}, loader = SpringBootContextLoader.class)
 @WebAppConfiguration
@@ -115,7 +118,7 @@ public class AccountManagementStepDefs {
         Boolean isUserExisting = false;
         Users userForAccount = this.userRepository.findBy(this.user.getAccount());
 
-        for (User user: userForAccount) {
+        for (User user : userForAccount) {
             if (user.getUsername().equals(username)) {
                 isUserExisting = true;
             }

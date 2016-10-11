@@ -3,12 +3,13 @@ package io.weba.api.domain.site;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.timezone.Timezone;
 import io.weba.api.infrastructure.postgres.type.TimezoneType;
-import javax.persistence.*;
-import java.net.URL;
-import java.util.UUID;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+
+import javax.persistence.*;
+import java.net.URL;
+import java.util.UUID;
 
 @TypeDefs({
         @TypeDef(name = "timezone", typeClass = TimezoneType.class)
@@ -46,7 +47,8 @@ public class Site {
         this.url = url;
     }
 
-    public Site() {}
+    public Site() {
+    }
 
     public UUID getId() {
         return id;

@@ -1,6 +1,9 @@
 package io.weba.api.domain.oauth;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "oauth_client_details")
 @Entity
@@ -53,7 +56,8 @@ public class OauthClientDetails {
         this.additionalInformation = "{}";
     }
 
-    public OauthClientDetails() {}
+    public OauthClientDetails() {
+    }
 
     public String getClientId() {
         return clientId;

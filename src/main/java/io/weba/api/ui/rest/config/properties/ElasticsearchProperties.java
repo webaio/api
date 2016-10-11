@@ -4,11 +4,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="elasticsearch", locations="classpath:elasticsearch.properties")
+@ConfigurationProperties(prefix = "elasticsearch", locations = "classpath:elasticsearch.properties")
 public class ElasticsearchProperties {
     private String nodes;
     private String clusterName;
-    private String eventsIndexName;
+    private String indexName;
+    private String eventsTypeName;
 
     public String getNodes() {
         return nodes;
@@ -26,11 +27,19 @@ public class ElasticsearchProperties {
         this.clusterName = clusterName;
     }
 
-    public String getEventsIndexName() {
-        return eventsIndexName;
+    public String getIndexName() {
+        return indexName;
     }
 
-    public void setEventsIndexName(String eventsIndexName) {
-        this.eventsIndexName = eventsIndexName;
+    public void setIndexName(String indexName) {
+        this.indexName = indexName;
+    }
+
+    public String getEventsTypeName() {
+        return eventsTypeName;
+    }
+
+    public void setEventsTypeName(String eventsTypeName) {
+        this.eventsTypeName = eventsTypeName;
     }
 }
