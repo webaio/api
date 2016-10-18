@@ -15,4 +15,6 @@ public interface SiteRepository {
     Sites findAll();
 
     Optional<Site> findBy(UUID siteId, Account account);
+
+    Optional<Site> findBy(String name, Account account);
 }

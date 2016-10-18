@@ -1,8 +1,14 @@
 package io.weba.api.domain.site;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.timezone.Timezone;
 import io.weba.api.infrastructure.postgres.type.TimezoneType;
+import javax.persistence.*;
+import java.net.URL;
+import java.util.UUID;
+
+import io.weba.api.ui.rest.view.View;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
@@ -19,17 +25,21 @@ import java.util.UUID;
 public class Site {
     @Id
     @Column
+    @JsonView({View.UserMe.class, View.AccountGet.class})
     private UUID id;
 
     @Column(name = "name")
+    @JsonView({View.UserMe.class, View.AccountGet.class})
     private String name;
 
     @Basic
     @Column
     @Type(type = "timezone")
+    @JsonView(View.UserMe.class)
     private Timezone timezone;
 
     @Column(name = "url")
+    @JsonView(View.UserMe.class)
     private URL url;
 
     @ManyToOne

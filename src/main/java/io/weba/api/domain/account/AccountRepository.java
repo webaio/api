@@ -8,6 +8,8 @@ public interface AccountRepository {
 
     Optional<Account> findBy(UUID accountId);
 
+    Optional<Account> findBy(UUID accountUuid, String username);
+
     Optional<Account> findBy(String name);
 
     Accounts findAll();

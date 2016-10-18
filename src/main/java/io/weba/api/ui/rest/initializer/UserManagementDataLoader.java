@@ -1,7 +1,7 @@
 package io.weba.api.ui.rest.initializer;
 
 import io.weba.api.application.base.DomainEventPublisher;
-import io.weba.api.application.event.AddAccountEvent;
+import io.weba.api.application.event.CreateAccountEvent;
 import io.weba.api.application.event.AddOauthClientDetailsEvent;
 import io.weba.api.application.event.AddUserEvent;
 import io.weba.api.domain.account.Account;
@@ -83,9 +83,9 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
                 .isPresent();
 
         if(!present) {
-            AddAccountEvent addAccountEvent = new AddAccountEvent(ACCOUNT_UUID);
-            addAccountEvent.name = ACCOUNT_NAME;
-            this.domainEventPublisher.publish(addAccountEvent);
+            CreateAccountEvent createAccountEvent = new CreateAccountEvent(ACCOUNT_UUID);
+            createAccountEvent.name = ACCOUNT_NAME;
+            this.domainEventPublisher.publish(createAccountEvent);
         }
 
         return this.accountRepository.findBy(ACCOUNT_UUID);

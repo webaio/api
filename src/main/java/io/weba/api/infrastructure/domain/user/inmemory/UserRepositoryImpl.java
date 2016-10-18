@@ -48,11 +48,11 @@ public class UserRepositoryImpl implements UserRepository {
     public Users findBy(Account account) {
         Users users = new Users();
 
-        for (User user : this.list) {
-            if (user.getAccount().getId().equals(account.getId())) {
-                users.add(user);
-            }
-        }
+//        for (User user : this.list) {
+//            if (user.getAccount().getId().equals(account.getId())) {
+//                users.add(user);
+//            }
+//        }
 
         return users;
     }

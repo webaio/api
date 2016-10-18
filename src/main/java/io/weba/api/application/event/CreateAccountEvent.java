@@ -1,23 +1,27 @@
 package io.weba.api.application.event;
 
 import io.weba.api.application.base.DomainEvent;
+
 import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonView;
+import io.weba.api.ui.rest.view.View;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class AddAccountEvent implements DomainEvent {
+public final class CreateAccountEvent implements DomainEvent {
     @NotNull
     @Size(min = 2, max = 30)
     public String name;
 
     private UUID accountId;
 
-    public AddAccountEvent() {
+    public CreateAccountEvent() {
         this.accountId = UUID.randomUUID();
     }
 
-    public AddAccountEvent(UUID accountId) {
+    public CreateAccountEvent(UUID accountId) {
         this.accountId = accountId;
     }
 
@@ -25,7 +29,7 @@ public class AddAccountEvent implements DomainEvent {
         return this.name;
     }
 
-    @JsonView()
+    @JsonView(View.AccountCreate.class)
     public UUID accountId() {
         return this.accountId;
     }

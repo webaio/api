@@ -1,16 +1,20 @@
 package io.weba.api.application.event;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import io.weba.api.application.base.DomainEvent;
-import io.weba.api.domain.account.Account;
 import io.weba.api.domain.timezone.Timezone;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import io.weba.api.ui.rest.view.View;
+import org.hibernate.validator.constraints.Email;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
-public class AddNewSiteEvent implements DomainEvent {
+public class CreateSiteEvent implements DomainEvent {
     @NotNull
     @Size(min = 2, max = 30)
     public String name;
@@ -22,11 +26,15 @@ public class AddNewSiteEvent implements DomainEvent {
     @org.hibernate.validator.constraints.URL
     public String url;
 
-    public Account account;
+    @NotNull
+    public String accountUuid;
+
+    @Email
+    public String username;
 
     private UUID siteId;
 
-    public AddNewSiteEvent() {
+    public CreateSiteEvent() {
         this.siteId = UUID.randomUUID();
     }
 
@@ -34,10 +42,7 @@ public class AddNewSiteEvent implements DomainEvent {
         return this.name;
     }
 
-    public Account account() {
-        return this.account;
-    }
-
+    @JsonView(View.SiteCreate.class)
     public UUID siteId() {
         return this.siteId;
     }
@@ -52,5 +57,13 @@ public class AddNewSiteEvent implements DomainEvent {
 
     public Timezone timezone() {
         return new Timezone(this.timezone);
+    }
+
+    public UUID accountUuid() {
+        return UUID.fromString(this.accountUuid);
+    }
+
+    public String username() {
+        return this.username;
     }
 }

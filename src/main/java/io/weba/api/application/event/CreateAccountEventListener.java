@@ -8,20 +8,20 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddAccountEventListener {
+public final class CreateAccountEventListener {
     private final AccountRepository accountRepository;
 
     @Autowired
-    public AddAccountEventListener(AccountRepository accountRepository) {
+    public CreateAccountEventListener(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
     @EventListener
-    public void handle(AddAccountEvent addAccountEvent) throws AccountWithGivenNameAlreadyExists {
-        if (this.accountRepository.findBy(addAccountEvent.name()).isPresent()) {
+    public void handle(CreateAccountEvent createAccountEvent) throws AccountWithGivenNameAlreadyExists {
+        if (this.accountRepository.findBy(createAccountEvent.name()).isPresent()) {
             throw new AccountWithGivenNameAlreadyExists();
         }
 
-        this.accountRepository.add(new Account(addAccountEvent.accountId(), addAccountEvent.name()));
+        this.accountRepository.add(new Account(createAccountEvent.accountId(), createAccountEvent.name()));
     }
 }

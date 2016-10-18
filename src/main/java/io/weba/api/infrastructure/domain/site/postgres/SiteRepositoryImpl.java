@@ -90,4 +90,18 @@ public class SiteRepositoryImpl implements SiteRepository {
             return site;
         });
     }
+
+    @Override
+    @Transactional
+    public Optional<Site> findBy(String name, Account account) {
+        Object result = this.sessionFactory
+                .getCurrentSession()
+                .createCriteria(Site.class)
+                .add(Restrictions.eq("name", name))
+                .add(Restrictions.eq("account", account))
+                .setMaxResults(1)
+                .uniqueResult();
+
+        return Optional.ofNullable((Site) result);
+    }
 }

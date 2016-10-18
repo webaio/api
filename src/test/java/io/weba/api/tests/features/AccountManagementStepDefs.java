@@ -5,8 +5,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.weba.api.application.base.DomainEventPublisher;
-import io.weba.api.application.event.AddAccountEvent;
-import io.weba.api.application.event.AddNewSiteEvent;
+import io.weba.api.application.event.CreateAccountEvent;
+import io.weba.api.application.event.CreateSiteEvent;
 import io.weba.api.application.event.AddUserEvent;
 import io.weba.api.domain.account.Account;
 import io.weba.api.domain.account.AccountRepository;
@@ -16,7 +16,6 @@ import io.weba.api.domain.site.Site;
 import io.weba.api.domain.site.SiteRepository;
 import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
-import io.weba.api.domain.user.Users;
 import io.weba.api.ui.rest.application.SpringApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootContextLoader;
@@ -55,10 +54,10 @@ public class AccountManagementStepDefs {
 
     @Given("^configured account with name \"(.*?)\"$")
     public void configured_account_with_name(String accountName) throws Throwable {
-        AddAccountEvent addAccountEvent = new AddAccountEvent();
-        addAccountEvent.name = accountName;
-        this.domainEventPublisher.publish(addAccountEvent);
-        this.account = this.accountRepository.findBy(addAccountEvent.accountId()).get();
+        CreateAccountEvent createAccountEvent = new CreateAccountEvent();
+        createAccountEvent.name = accountName;
+        this.domainEventPublisher.publish(createAccountEvent);
+        this.account = this.accountRepository.findBy(createAccountEvent.accountId()).get();
     }
 
     @And("^logged as an user with admin role$")
@@ -80,13 +79,13 @@ public class AccountManagementStepDefs {
 
     @When("^I decide to create site with configuration$")
     public void iDecideToCreateSiteWithConfiguration(List<String> entries) throws Throwable {
-        AddNewSiteEvent addNewSiteEvent = new AddNewSiteEvent();
-        addNewSiteEvent.account = this.user.getAccount();
-        addNewSiteEvent.name = entries.get(0);
-        addNewSiteEvent.url = entries.get(1);
-        addNewSiteEvent.timezone = entries.get(2);
-        this.domainEventPublisher.publish(addNewSiteEvent);
-        this.site = this.siteRepository.findBy(addNewSiteEvent.siteId(), this.user.getAccount()).get();
+        CreateSiteEvent createSiteEvent = new CreateSiteEvent();
+//        createSiteEvent.account = this.user.getAccount();
+        createSiteEvent.name = entries.get(0);
+        createSiteEvent.url = entries.get(1);
+        createSiteEvent.timezone = entries.get(2);
+        this.domainEventPublisher.publish(createSiteEvent);
+//        this.site = this.siteRepository.findBy(createSiteEvent.siteId(), this.user.getAccount()).get();
     }
 
     @Then("^I should see configured tracker with given javascript code$")
@@ -101,7 +100,7 @@ public class AccountManagementStepDefs {
         this.roleRepository.add(new Role(roleId, Role.ROLE_USER));
 
         AddUserEvent addUserEvent = new AddUserEvent();
-        addUserEvent.account = this.user.getAccount();
+//        addUserEvent.account = this.user.getAccount();
         addUserEvent.firstName = entries.get(2);
         addUserEvent.lastName = entries.get(3);
         addUserEvent.username = entries.get(0);
@@ -116,13 +115,13 @@ public class AccountManagementStepDefs {
     @Then("^I should see create user with username \"([^\"]*)\"$")
     public void iShouldSeeCreateUserWithUsername(String username) throws Throwable {
         Boolean isUserExisting = false;
-        Users userForAccount = this.userRepository.findBy(this.user.getAccount());
+//        Users userForAccount = this.userRepository.findBy(this.user.getAccount());
 
-        for (User user : userForAccount) {
-            if (user.getUsername().equals(username)) {
-                isUserExisting = true;
-            }
-        }
+//        for (User user: userForAccount) {
+//            if (user.getUsername().equals(username)) {
+//                isUserExisting = true;
+//            }
+//        }
 
         assertTrue(isUserExisting);
     }

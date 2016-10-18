@@ -33,6 +33,17 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
+    public Optional<Account> findBy(UUID accountUuid, String userUuid) {
+        for (Account account : this.list) {
+            if (account.getId() == accountUuid) {
+                return Optional.of(account);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Account> findBy(String name) {
         for (Account account : this.list) {
             if (account.getName().equals(name)) {

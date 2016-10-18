@@ -4,6 +4,7 @@ import io.weba.api.domain.account.Account;
 import io.weba.api.domain.user.User;
 import io.weba.api.domain.user.UserRepository;
 import io.weba.api.domain.user.Users;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional
     public Optional<User> findBy(String username) {
-        Object result = this.sessionFactory
+        User user = (User) this.sessionFactory
                 .getCurrentSession()
                 .createCriteria(User.class)
                 .add(Restrictions.eq("username", username))
-                .setMaxResults(1)
                 .uniqueResult();
 
-        return Optional.ofNullable((User) result);
+        return Optional.ofNullable(user);
     }
 
     @Override

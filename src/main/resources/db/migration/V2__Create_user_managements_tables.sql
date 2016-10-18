@@ -14,7 +14,12 @@ CREATE TABLE users (
     password VARCHAR(100) not null,
     first_name VARCHAR(30) not null,
     last_name VARCHAR(30) not null,
-    account_id UUID REFERENCES accounts (id) not null,
     role_id UUID REFERENCES roles (id) not null,
     enabled BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE user_accounts (
+    user_id UUID REFERENCES users(id) NOT NULL,
+    account_id UUID REFERENCES accounts(id) NOT NULL,
+    PRIMARY KEY(user_id, account_id)
 );

@@ -67,4 +67,9 @@ public class SiteRepositoryImpl implements SiteRepository {
                 }
         );
     }
+
+    @Override
+    public Optional<Site> findBy(String name, Account account) {
+        return null;
+    }
 }
