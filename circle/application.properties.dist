@@ -1,9 +1,14 @@
 spring.datasource.url= jdbc:postgresql://127.0.0.1:5432/weba
 spring.datasource.username=weba
 spring.datasource.password=weba
+spring.jpa.hibernate.ddl-auto=validate
+spring.h2.console.enabled=true
 
 logging.level.org.hibernate.SQL=DEBUG
-
-spring.profiles.active=development
-
+spring.profiles.active=testing
 weba.collector_url = //weba.cloud
+
+flyway.enabled=true
+flyway.password=weba
+flyway.user=weba
+flyway.url=jdbc:postgresql://100.0.0.1:5432/weba?user=postgres&password=TCrGaanoC2s7gT

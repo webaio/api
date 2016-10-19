@@ -18,11 +18,9 @@ dependencies:
     - createdb weba
     - psql -U postgres -d postgres -c "alter user weba with password 'weba';"
     - rm ./build.gradle
-    - cp ./circle/build.gradle ./build.gradle
     - cp ./circle/application.properties.dist ./src/main/resources/application.properties
     - cp ./circle/elasticsearch.properties.dist ./src/main/resources/elasticsearch.properties
     - ./gradlew clean
-    - ./gradlew flywayMigrate -i
     - ./gradlew build
 
 general:

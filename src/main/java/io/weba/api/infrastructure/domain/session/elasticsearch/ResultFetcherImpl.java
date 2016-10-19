@@ -32,21 +32,22 @@ public class ResultFetcherImpl implements ResultFetcher {
     public SearchResponse fetchResponse(SessionCardinalityCriteria sessionCardinalityCriteria) {
         return client.prepareSearch(elasticsearchProperties.getIndexName())
                 .setTypes(elasticsearchProperties.getEventsTypeName())
-                .addAggregation(new CardinalityAggregationFactory().create())
+                .addAggregation(new CardinalityAggregationFactory().create(sessionCardinalityCriteria))
                 .setQuery(new QueryRangeFactory().createRangeQuery(sessionCardinalityCriteria))
+                .setSize(0)
                 .execute()
                 .actionGet();
     }
 
     private class CardinalityAggregationFactory {
-        DateHistogramBuilder create() {
+        DateHistogramBuilder create(SessionCardinalityCriteria sessionCardinalityCriteria) {
             CardinalityBuilder cardinalityBuilder = AggregationBuilders
                     .cardinality(Configuration.aggregateSessionCardinalityName)
                     .field(Configuration.sessionFieldName);
 
             return AggregationBuilders
                     .dateHistogram(Configuration.aggregateDateHistogramName)
-                    .interval(DateHistogramInterval.DAY)
+                    .interval(new DateHistogramInterval(sessionCardinalityCriteria.interval.toString()))
                     .field(Configuration.dateFieldName)
                     .minDocCount(1)
                     .subAggregation(cardinalityBuilder);

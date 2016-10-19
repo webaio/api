@@ -63,16 +63,23 @@ public class UserManagementDataLoader implements ApplicationListener<ContextRefr
     public void onApplicationEvent(ContextRefreshedEvent event) {
         Optional<Account> account = this.createAccount();
 
-        this.createRoles();
-        this.createUser(USER_USER_UUID, account.get(), Role.ROLE_USER, "user@weba.io", "Marco", "Wayne");
-        this.createUser(USER_ADMIN_UUID, account.get(), Role.ROLE_ADMIN, "admin@weba.io", "Tommy", "Lee");
-        this.createUser(USER_SUPER_ADMIN_UUID, account.get(), Role.ROLE_SUPER_ADMIN, "super_admin@weba.io", "Jessica", "Kovalski");
+        createRoles();
+        createUsers(account);
+        createClient();
+    }
 
+    private void createClient() {
         boolean isClientExists = this.oauthClientDetailsRepository.findBy(OAUTH_CLIENT_UUID.toString()).isPresent();
 
         if (!isClientExists) {
             this.createOauthClient();
         }
+    }
+
+    private void createUsers(Optional<Account> account) {
+        this.createUser(USER_USER_UUID, account.get(), Role.ROLE_USER, "user@weba.io", "Marco", "Wayne");
+        this.createUser(USER_ADMIN_UUID, account.get(), Role.ROLE_ADMIN, "admin@weba.io", "Tommy", "Lee");
+        this.createUser(USER_SUPER_ADMIN_UUID, account.get(), Role.ROLE_SUPER_ADMIN, "super_admin@weba.io", "Jessica", "Kovalski");
     }
 
     @Transactional

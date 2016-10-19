@@ -1,4 +1,4 @@
-package io.weba.api.ui.rest.controller;
+package io.weba.api.ui.rest.exception.handler;
 
 import io.weba.api.domain.account.AccountWithGivenNameAlreadyExists;
 import io.weba.api.domain.account.AccountWithGivenUuidNotFound;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ExceptionHandlingController {
+public class UsersExceptionHandler {
     @ExceptionHandler(AccountWithGivenNameAlreadyExists.class)
     public ResponseEntity<GenericExceptionDecorator> handleAccountWithGivenNameAlreadyExists() {
         return new ResponseEntity<>(

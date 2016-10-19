@@ -7,7 +7,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan({"io.weba.api.ui.rest.controller"})
 public class ResourceServerWebConfig extends ResourceServerConfigurerAdapter {
     @Override
@@ -16,7 +15,6 @@ public class ResourceServerWebConfig extends ResourceServerConfigurerAdapter {
                 .anonymous().and()
                 .authorizeRequests()
                 .antMatchers("/public/**").permitAll()
-                .antMatchers("/api/**").authenticated();
-        ;
+                .antMatchers("/api/**").authenticated();;
     }
 }
